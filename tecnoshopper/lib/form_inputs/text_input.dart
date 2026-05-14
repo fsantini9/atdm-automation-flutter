@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ces/pages/helpers/demo_data.dart';
 import 'package:flutter_ces/pages/helpers/styles.dart';
+import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 
 import 'input_validator.dart';
 
@@ -38,13 +39,26 @@ class _TextInputState extends State<TextInput> {
 
   String _value = '';
   String _errorText = '';
+  MaskedTextController? _maskedController;
 
   String get _keyValue => (widget.key as ValueKey).value as String;
 
   @override
   initState() {
     super.initState();
-    // Reset the valid state on notifier change
+    if (widget.type == InputType.telephone) {
+      _maskedController = MaskedTextController(
+        mask: '000-000-000',
+        text: widget.initialValue,
+      );
+      _maskedController!.addListener(() {
+        _value = _maskedController!.text;
+        widget.onChange?.call(_keyValue, _value);
+        Future.delayed(const Duration(milliseconds: 100), () {
+          if (mounted) setState(() {});
+        });
+      });
+    }
     if (widget.valueNotifier != null) {
       widget.valueNotifier?.addListener(() => _isValid = false);
     }
@@ -52,6 +66,7 @@ class _TextInputState extends State<TextInput> {
 
   @override
   dispose() {
+    _maskedController?.dispose();
     super.dispose();
   }
 
@@ -77,28 +92,29 @@ class _TextInputState extends State<TextInput> {
         children: <Widget>[
           if (widget.label.isNotEmpty)
             Positioned(
-                top: -24, child: Text(widget.label, style: Styles.inputLabel)),
+                top: -24, child: Text(widget.label, style: FormStyles.inputLabel)),
           TextFormField(
-            initialValue: widget.initialValue,
-            style: Styles.orderTotalLabel,
+            initialValue: _maskedController == null ? widget.initialValue : null,
+            controller: _maskedController,
+            style: FormStyles.orderTotalLabel,
             enabled: widget.isActive,
-            onChanged: _handleChange,
+            onChanged: _maskedController == null ? _handleChange : null,
             keyboardType: _setKeyboardType(),
             autovalidateMode: AutovalidateMode.onUserInteraction,
             validator: _validateField,
-            decoration: Styles.getInputDecoration(helper: widget.helper),
+            decoration: FormStyles.getInputDecoration(helper: widget.helper),
           ),
           Positioned(
             top: 6,
             left: 12,
-            child: Text(_getLabel().toUpperCase(), style: Styles.labelOptional),
+            child: Text(_getLabel().toUpperCase(), style: FormStyles.labelOptional),
           ),
           if (_errorText.isNotEmpty)
             Positioned(
               top: 8,
               right: 14,
               child:
-                  Text(_errorText.toUpperCase(), style: Styles.labelNotValid),
+                  Text(_errorText.toUpperCase(), style: FormStyles.labelNotValid),
             ),
         ],
       ),
@@ -107,7 +123,7 @@ class _TextInputState extends State<TextInput> {
 
   String _getLabel() {
     String label = '';
-    if (!widget.isRequired && _value.isEmpty) label = 'Optional';
+    if (!widget.isRequired && _value.isEmpty) label = 'Opcional';
     if (_value.isNotEmpty && widget.label.isEmpty ||
         widget.initialValue.isNotEmpty) return widget.helper;
     return label;

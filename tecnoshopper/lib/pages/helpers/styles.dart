@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Styles {
+class FormStyles {
   static double formRadius = 20;
   static double hzPadding = 37;
   static double vtFormPadding = 18;
@@ -13,8 +13,8 @@ class Styles {
   static Color grayColor = Color(0xff505050);
   static Color darkGrayColor = Color(0xff2d2d2d);
 
-  static Color helperColor = Color(0xff787878);
-  static Color optionalColor = Color(0xffA7A7A7);
+  static Color helperColor = Color(0xff555555);
+  static Color optionalColor = Color(0xff007b80);
   static Color errorColor = Color(0xffea6060);
 
   static final BoxDecoration formContainerDecoration = BoxDecoration(
@@ -22,28 +22,28 @@ class Styles {
     boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 8)],
     border: Border.all(color: Color(0xffd4d4d4)),
     borderRadius: BorderRadius.vertical(
-      top: Radius.circular(Styles.formRadius),
+      top: Radius.circular(FormStyles.formRadius),
     ),
   );
 
-  static TextStyle barlow = TextStyle(fontFamily: "Barlow");
-  static TextStyle baloo = TextStyle(fontFamily: "Baloo");
+  static TextStyle barlow = const TextStyle();
+  static TextStyle baloo = const TextStyle();
 
   static TextStyle appTitle1 = barlow.copyWith(
-    color: Styles.primaryColor,
+    color: FormStyles.primaryColor,
     fontWeight: FontWeight.w800,
     fontSize: 8,
     letterSpacing: 1.95,
   );
   static TextStyle appTitle2 = baloo.copyWith(
-      color: Styles.primaryColor,
+      color: FormStyles.primaryColor,
       fontSize: 32,
       letterSpacing: -1.08,
       height: 1.1,
       decoration: TextDecoration.underline,
       decorationThickness: 1.2);
 
-  static TextStyle formTitle = baloo.copyWith(color: Styles.primaryColor, height: 1, fontSize: 30, letterSpacing: 0.22);
+  static TextStyle formTitle = baloo.copyWith(color: FormStyles.primaryColor, height: 1, fontSize: 30, letterSpacing: 0.22);
 
   static TextStyle formSection =
       barlow.copyWith(fontSize: 16, fontWeight: FontWeight.w600, letterSpacing: 0.5, color: secondaryColor);
@@ -52,40 +52,40 @@ class Styles {
       barlow.copyWith(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16, letterSpacing: 0.5);
 
   static TextStyle productName =
-      barlow.copyWith(fontWeight: FontWeight.w600, color: Styles.secondaryColor, letterSpacing: 0.63, fontSize: 20);
+      barlow.copyWith(fontWeight: FontWeight.w600, color: FormStyles.secondaryColor, letterSpacing: 0.63, fontSize: 20);
   static TextStyle productPrice =
       barlow.copyWith(fontWeight: FontWeight.w500, fontSize: 20, height: 1.8, letterSpacing: 0.63);
   static TextStyle orderLabel =
-      barlow.copyWith(fontSize: 14, color: Styles.baseColor, letterSpacing: 0.44, fontWeight: FontWeight.w500);
+      barlow.copyWith(fontSize: 14, color: FormStyles.baseColor, letterSpacing: 0.44, fontWeight: FontWeight.w500);
   static TextStyle orderPrice =
-      barlow.copyWith(fontSize: 14, color: Styles.baseColor, letterSpacing: 0.44, fontWeight: FontWeight.w600);
+      barlow.copyWith(fontSize: 14, color: FormStyles.baseColor, letterSpacing: 0.44, fontWeight: FontWeight.w600);
   static TextStyle orderTotalLabel =
-      barlow.copyWith(fontSize: 16, color: Styles.baseColor, letterSpacing: 0.5, fontWeight: FontWeight.w500);
+      barlow.copyWith(fontSize: 16, color: FormStyles.baseColor, letterSpacing: 0.5, fontWeight: FontWeight.w500);
   static TextStyle orderTotal =
-      barlow.copyWith(fontSize: 20, color: Styles.baseColor, letterSpacing: 0.63, fontWeight: FontWeight.bold);
+      barlow.copyWith(fontSize: 20, color: FormStyles.baseColor, letterSpacing: 0.63, fontWeight: FontWeight.bold);
 
   static TextStyle helperStyle =
       barlow.copyWith(fontSize: 16, color: helperColor, letterSpacing: 0.5, fontWeight: FontWeight.w500);
   static TextStyle inputStyle =
-      barlow.copyWith(fontSize: 16, color: Styles.baseColor, letterSpacing: 0.5, fontWeight: FontWeight.w500);
+      barlow.copyWith(fontSize: 16, color: FormStyles.baseColor, letterSpacing: 0.5, fontWeight: FontWeight.w500);
 
   static TextStyle submitButtonText =
       barlow.copyWith(fontSize: 16, color: Colors.white, letterSpacing: 0.44, fontWeight: FontWeight.bold);
 
   static TextStyle labelOptional =
-      barlow.copyWith(fontSize: 8, color: optionalColor, fontWeight: FontWeight.bold, letterSpacing: 1);
+      barlow.copyWith(fontSize: 10, color: optionalColor, fontWeight: FontWeight.w600, letterSpacing: 0.5);
   static TextStyle labelNotValid =
       barlow.copyWith(fontSize: 8, color: errorColor, fontWeight: FontWeight.bold, letterSpacing: 1);
   static TextStyle labelRequired =
       barlow.copyWith(fontSize: 6, color: grayColor, fontWeight: FontWeight.bold, letterSpacing: .5);
 
   static TextStyle textButton =
-      barlow.copyWith(fontSize: 16, color: Styles.secondaryColor, letterSpacing: 0.5, fontWeight: FontWeight.bold);
+      barlow.copyWith(fontSize: 16, color: FormStyles.secondaryColor, letterSpacing: 0.5, fontWeight: FontWeight.bold);
   static TextStyle optionsTitle =
-      barlow.copyWith(fontSize: 20, color: Styles.darkGrayColor, letterSpacing: 0.63, fontWeight: FontWeight.w600);
+      barlow.copyWith(fontSize: 20, color: FormStyles.darkGrayColor, letterSpacing: 0.63, fontWeight: FontWeight.w600);
 
   static TextStyle iconDropdown = baloo.copyWith(
-    color: Styles.secondaryColor,
+    color: FormStyles.secondaryColor,
     fontSize: 27,
   );
 
@@ -93,19 +93,19 @@ class Styles {
       fontSize: 12, color: errorColor, fontStyle: FontStyle.italic, letterSpacing: 0.38, fontWeight: FontWeight.w500);
 
   static TextStyle inputLabel =
-      barlow.copyWith(fontSize: 16, color: Styles.baseColor, letterSpacing: 0.5, fontWeight: FontWeight.w600);
+      barlow.copyWith(fontSize: 16, color: FormStyles.baseColor, letterSpacing: 0.5, fontWeight: FontWeight.w600);
 
   static InputDecoration getInputDecoration({String? helper}) {
     return InputDecoration(
-      helperStyle: Styles.helperStyle,
-      focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Styles.secondaryColor)),
-      errorBorder: OutlineInputBorder(borderSide: BorderSide(color: Styles.errorColor)),
-      enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Styles.lightGrayColor)),
+      helperStyle: FormStyles.helperStyle,
+      focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: FormStyles.secondaryColor)),
+      errorBorder: OutlineInputBorder(borderSide: BorderSide(color: FormStyles.errorColor)),
+      enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: FormStyles.lightGrayColor)),
       border: OutlineInputBorder(),
       errorStyle: TextStyle(color: Colors.transparent),
       helperText: '',
       hintText: helper,
-      hintStyle: Styles.helperStyle,
+      hintStyle: FormStyles.helperStyle,
     );
   }
 }

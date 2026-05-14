@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_ces/pages/compra_forms/orderSuccess.dart';
+import 'package:flutter_ces/pages/compra_forms/order_success.dart';
 import '../../components/stack_pages_route.dart';
 import '../home_forms/demo.dart';
 import 'package:provider/provider.dart';
 
 import '../helpers/demo_data.dart';
+import '../helpers/country_data.dart';
 import '../../form_inputs/checkbox_input.dart';
 import '../../form_inputs/credit_card_input.dart';
 import '../helpers/form_mixin.dart';
@@ -45,7 +46,7 @@ class _CompraFormPaymentState extends State<CompraFormPayment> with FormMixin {
       pageSizeProportion: widget.pageSize ?? 0.85,
       title: 'Pago',
       children: [
-        Text('\$34.00', style: Styles.orderTotal),
+        Text('\$34.00', style: FormStyles.orderTotal),
         Separator(),
         _buildShippingSection(),
         Separator(),
@@ -121,9 +122,9 @@ class _CompraFormPaymentState extends State<CompraFormPayment> with FormMixin {
         children: <Widget>[
           Container(
               constraints: BoxConstraints(minWidth: 85),
-              child: Text('Contacto', style: Styles.orderLabel)),
+              child: Text('Contacto', style: FormStyles.orderLabel)),
           Text(values[FormKeys.email] ?? '',
-              overflow: TextOverflow.clip, style: Styles.orderPrice),
+              overflow: TextOverflow.clip, style: FormStyles.orderPrice),
         ],
       ),
       Padding(
@@ -133,9 +134,9 @@ class _CompraFormPaymentState extends State<CompraFormPayment> with FormMixin {
           children: <Widget>[
             Container(
                 constraints: BoxConstraints(minWidth: 85),
-                child: Text('Enviar a', style: Styles.orderLabel)),
+                child: Text('Enviar a', style: FormStyles.orderLabel)),
             Text(_getShippingAddress(),
-                overflow: TextOverflow.clip, style: Styles.orderPrice),
+                overflow: TextOverflow.clip, style: FormStyles.orderPrice),
           ],
         ),
       ),
@@ -144,8 +145,8 @@ class _CompraFormPaymentState extends State<CompraFormPayment> with FormMixin {
         children: <Widget>[
           Container(
               constraints: BoxConstraints(minWidth: 85),
-              child: Text('Metodo', style: Styles.orderLabel)),
-          Text('GRATIS', overflow: TextOverflow.clip, style: Styles.orderPrice),
+              child: Text('Metodo', style: FormStyles.orderLabel)),
+          Text('GRATIS', overflow: TextOverflow.clip, style: FormStyles.orderPrice),
         ],
       )
     ]);
@@ -182,11 +183,11 @@ class _CompraFormPaymentState extends State<CompraFormPayment> with FormMixin {
           child: Padding(
             padding: const EdgeInsets.only(bottom: 26.0, left: 12),
             child: MaterialButton(
-              disabledColor: Styles.lightGrayColor,
+              disabledColor: FormStyles.lightGrayColor,
               elevation: 0,
-              color: Styles.secondaryColor,
+              color: FormStyles.secondaryColor,
               height: 56,
-              child: Text('Aplicar', style: Styles.submitButtonText),
+              child: Text('Aplicar', style: FormStyles.submitButtonText),
               onPressed: null,
             ),
           ),
@@ -202,8 +203,8 @@ class _CompraFormPaymentState extends State<CompraFormPayment> with FormMixin {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            Text('Comprar', style: Styles.submitButtonText),
-            Text('\$70', style: Styles.submitButtonText),
+            Text('Comprar', style: FormStyles.submitButtonText),
+            Text('\$70', style: FormStyles.submitButtonText),
           ],
         ),
       ),

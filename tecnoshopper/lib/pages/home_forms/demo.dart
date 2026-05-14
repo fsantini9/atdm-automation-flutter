@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_ces/pages/login_forms/loginPage.dart';
+import 'package:flutter_ces/pages/login_forms/login_page.dart';
 import 'package:provider/provider.dart';
 
 import '../../components/stack_pages_route.dart';
@@ -27,8 +27,10 @@ class _CompraFormsDemoState extends State<CompraFormsDemo> {
         Provider<SharedFormState>(
           create: (_) => SharedFormState(),
           //Use WillPopScope to intercept hardware back taps, and instead pop the nested navigator
-          child: WillPopScope(
-            onWillPop: _handleBackPop,
+          child: PopScope(
+            onPopInvokedWithResult: (didPop, result) async {
+              if (!didPop) await _handleBackPop();
+            },
             //Use a nested navigator to group the 3 form views under 1 parent view
             child: Navigator(
               key: navKey,

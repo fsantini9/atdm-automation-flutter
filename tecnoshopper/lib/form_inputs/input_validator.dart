@@ -34,8 +34,8 @@ class InputValidator {
   }
 
   static bool _validatePhoneNumber(String value) {
-    RegExp telRegExp = RegExp(r"(^(1\s?)?(\(\d{3}\)|\d{3})[\s\-]?\d{3}[\s\-]?\d{4}$)");
-    return telRegExp.hasMatch(value);
+    final digits = value.replaceAll('-', '');
+    return digits.length == 9 && RegExp(r'^\d+$').hasMatch(digits);
   }
 
   static bool _validateCreditCardNumber(String value, CreditCardNetwork cardNetwork) {

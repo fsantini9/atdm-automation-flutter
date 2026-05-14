@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Styles {
+class HomeStyles {
   //AppBar Styles
   static final appBarLeadingIconColor = Colors.black;
   static final appBarBackgroundColor = Colors.white;
@@ -22,9 +22,10 @@ class Styles {
       ),
     ],
   );
-  static final TextStyle nombreTextStyle = TextStyle(fontSize: 8);
+  static final TextStyle nombreTextStyle = TextStyle(
+      fontSize: 14, fontWeight: FontWeight.w600, color: Colors.black87);
   static final TextStyle infoTextStyle =
-      TextStyle(color: Colors.blue, fontWeight: FontWeight.bold, fontSize: 16);
+      TextStyle(color: Color(0xFF555555), fontSize: 12);
 
   //Bottom Styles
   static const Color backgroundColor = Color(0xff21262E);

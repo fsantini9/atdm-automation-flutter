@@ -12,7 +12,7 @@ class FormSectionTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10.0).add(padding),
-      child: Text(title.toUpperCase(), style: Styles.formSection),
+      child: Text(title.toUpperCase(), style: FormStyles.formSection),
     );
   }
 }

@@ -72,50 +72,50 @@ class _CreditCardInfoInputState extends State<CreditCardInfoInput> {
         children: <Widget>[
           if (widget.label.isNotEmpty)
             Positioned(
-                top: -24, child: Text(widget.label, style: Styles.inputLabel)),
+                top: -24, child: Text(widget.label, style: FormStyles.inputLabel)),
           TextFormField(
             controller: _textController,
             //initialValue: widget.initialValue,
-            style: Styles.orderTotalLabel,
+            style: FormStyles.orderTotalLabel,
             onChanged: _handleChange,
             keyboardType: TextInputType.number,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             validator: _validateField,
-            decoration: Styles.getInputDecoration(helper: widget.helper),
+            decoration: FormStyles.getInputDecoration(helper: widget.helper),
             /*
             controller: _textController,
-            style: Styles.orderTotalLabel,
+            style: FormStyles.orderTotalLabel,
             onChanged: _handleChange,
             keyboardType: TextInputType.number,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             validator: _validateField,
-            decoration: Styles.getInputDecoration(helper: widget.helper),
+            decoration: FormStyles.getInputDecoration(helper: widget.helper),
             */
           ),
           Positioned(
             top: 6,
             left: 12,
-            child: Text(_getLabel().toUpperCase(), style: Styles.labelOptional),
+            child: Text(_getLabel().toUpperCase(), style: FormStyles.labelOptional),
           ),
           if (_errorText.isNotEmpty)
             Positioned(
               top: 8,
               right: 14,
               child:
-                  Text(_errorText.toUpperCase(), style: Styles.labelNotValid),
+                  Text(_errorText.toUpperCase(), style: FormStyles.labelNotValid),
             ),
           if (widget.inputType == CreditCardInputType.number)
             Positioned(
                 top: 15,
                 right: 18,
-                child: Icon(_getCreditCardIcon(),
-                    size: 28, color: Styles.darkGrayColor))
+                child: FaIcon(_getCreditCardIcon(),
+                    size: 28, color: FormStyles.darkGrayColor))
         ],
       ),
     );
   }
 
-  IconData _getCreditCardIcon() {
+  FaIconData _getCreditCardIcon() {
     switch (_creditCardType) {
       case CreditCardNetwork.visa:
         return FontAwesomeIcons.ccVisa;
@@ -124,7 +124,7 @@ class _CreditCardInfoInputState extends State<CreditCardInfoInput> {
       case CreditCardNetwork.amex:
         return FontAwesomeIcons.ccAmex;
       default:
-        return Icons.credit_card;
+        return FontAwesomeIcons.creditCard;
     }
   }
 

@@ -21,16 +21,16 @@ class _CheckBoxInputState extends State<CheckBoxInput> {
       height: 56,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(4),
-        border: Border.all(color: Styles.lightGrayColor),
+        border: Border.all(color: FormStyles.lightGrayColor),
       ),
       child: Row(
         children: <Widget>[
           Checkbox(
-            activeColor: Styles.secondaryColor,
+            activeColor: FormStyles.secondaryColor,
             onChanged: _handleChange,
             value: _value,
           ),
-          Text(widget.label, style: Styles.inputLabel),
+          Text(widget.label, style: FormStyles.inputLabel),
         ],
       ),
     );

@@ -4,8 +4,6 @@ import 'package:flutter/services.dart';
 import 'styles.dart';
 
 class FormPage extends StatelessWidget {
-  static Map<String, String> formState = {};
-
   final List<Widget> children;
   final double pageSizeProportion;
   final GlobalKey<FormState>? formKey;
@@ -44,17 +42,27 @@ class FormPage extends StatelessWidget {
             onTap: () => _handleTap(context),
             child: Container(
               padding:
-                  EdgeInsets.symmetric(horizontal: Styles.hzPadding).add(EdgeInsets.only(top: Styles.vtFormPadding)),
+                  EdgeInsets.symmetric(horizontal: FormStyles.hzPadding).add(EdgeInsets.only(top: FormStyles.vtFormPadding)),
               width: screenSize.width,
               height: screenSize.height * pageSizeProportion,
-              decoration: Styles.formContainerDecoration,
+              decoration: FormStyles.formContainerDecoration,
               child: Scaffold(
                 backgroundColor: Colors.white,
                 body: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
-                      Text(title, style: Styles.formTitle),
+                      ShaderMask(
+                        shaderCallback: (bounds) => const LinearGradient(
+                          colors: [Color(0xff00b27f), Color(0xff142047)],
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight,
+                        ).createShader(bounds),
+                        child: Text(
+                          title.toUpperCase(),
+                          style: FormStyles.formTitle.copyWith(color: Colors.white, fontSize: 22),
+                        ),
+                      ),
                       Expanded(
                         child: Form(
                           key: formKey,

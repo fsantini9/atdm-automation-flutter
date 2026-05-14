@@ -38,7 +38,7 @@ class _AppDropdownMenuState extends State<AppDropdownMenu> {
       isValid = true;
     }
     var items = _buildMenuItems();
-    //items.forEach((i)=>print("----> ${i.value}"));
+    //items.forEach((i)=>debugPrint("----> ${i.value}"));
 
     return Stack(
       alignment: Alignment.topCenter,
@@ -51,20 +51,20 @@ class _AppDropdownMenuState extends State<AppDropdownMenu> {
           validator: _validate,
           decoration: InputDecoration(
             contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Styles.secondaryColor)),
-            errorBorder: OutlineInputBorder(borderSide: BorderSide(color: Styles.errorColor)),
-            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Styles.lightGrayColor)),
+            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: FormStyles.secondaryColor)),
+            errorBorder: OutlineInputBorder(borderSide: BorderSide(color: FormStyles.errorColor)),
+            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: FormStyles.lightGrayColor)),
             border: OutlineInputBorder(),
             errorStyle: TextStyle(color: Colors.transparent),
             helperText: '',
             hintText: widget.label,
-            hintStyle: Styles.helperStyle,
+            hintStyle: FormStyles.helperStyle,
           ),
         ),
         Positioned(
           top: 10,
           right: 15,
-          child: Text('▼', style: Styles.iconDropdown),
+          child: Text('▼', style: FormStyles.iconDropdown),
         ),
         GestureDetector(
           onTap: _showOptions,
@@ -82,7 +82,7 @@ class _AppDropdownMenuState extends State<AppDropdownMenu> {
     var items = widget.options.map((o) {
       return DropdownMenuItem(
         value: o,
-        child: Text(o, style: Styles.orderTotalLabel),
+        child: Text(o, style: FormStyles.orderTotalLabel),
       );
     }).toList();
     return items;
@@ -139,17 +139,17 @@ class _DropdownOptionsState extends State<DropdownOptions> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        title: Center(child: Text(widget.title, style: Styles.optionsTitle)),
+        title: Center(child: Text(widget.title, style: FormStyles.optionsTitle)),
         actions: <Widget>[
           TextButton(
-            child: Text('Listo', style: Styles.textButton),
+            child: Text('Listo', style: FormStyles.textButton),
             onPressed: _sendSelectedOption,
           )
         ],
       ),
       backgroundColor: Color(0xfff4f4f4),
       body: Container(
-        decoration: BoxDecoration(border: Border(top: BorderSide(color: Styles.grayColor))),
+        decoration: BoxDecoration(border: Border(top: BorderSide(color: FormStyles.grayColor))),
         child: Flex(
           direction: Axis.vertical,
           children: <Widget>[
@@ -170,12 +170,12 @@ class _DropdownOptionsState extends State<DropdownOptions> {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 40, vertical: 12),
         decoration:
-            BoxDecoration(color: Colors.white, border: Border(bottom: BorderSide(color: Styles.lightGrayColor))),
+            BoxDecoration(color: Colors.white, border: Border(bottom: BorderSide(color: FormStyles.lightGrayColor))),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            Text(option, style: Styles.orderTotalLabel),
-            Icon(Icons.check, color: _selectedOption == option ? Styles.secondaryColor : Colors.transparent, size: 40)
+            Text(option, style: FormStyles.orderTotalLabel),
+            Icon(Icons.check, color: _selectedOption == option ? FormStyles.secondaryColor : Colors.transparent, size: 40)
           ],
         ),
       ),

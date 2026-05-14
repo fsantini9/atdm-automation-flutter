@@ -5,6 +5,7 @@ import '../../components/section_title.dart';
 import '../../components/stack_pages_route.dart';
 import '../../components/submit_button.dart';
 import '../helpers/demo_data.dart';
+import '../helpers/country_data.dart';
 import '../../form_inputs/dropdown_menu.dart';
 import '../../form_inputs/text_input.dart';
 import '../helpers/form_mixin.dart';
@@ -40,46 +41,43 @@ class _CompraFormInformationState extends State<CompraFormInformation> with Form
     super.initState();
     _countries = CountryData.getCountries();
     formState = Provider.of<SharedFormState>(context, listen: false);
-    if (!values.containsKey(FormKeys.country)) {
-      // if not value, set default country
-      _country = ValueNotifier(_countries[2]);
+    final savedCountry = values[FormKeys.country];
+    if (savedCountry == null || !_countries.contains(savedCountry)) {
+      _country = ValueNotifier('Uruguay');
       values[FormKeys.country] = _country.value;
+    } else {
+      _country = ValueNotifier(savedCountry);
     }
     _updateCountrySubdivision(_selectedCountry);
   }
 
   @override
   Widget build(BuildContext context) {
-    print("Rebuilding information @ ${DateTime.now().millisecondsSinceEpoch}");
+    debugPrint("Rebuilding information @ ${DateTime.now().millisecondsSinceEpoch}");
     return FormPage(
       formKey: _formKey,
       isHidden: widget.isHidden,
       pageSizeProportion: widget.pageSize ?? 0.85,
-      title: 'Informacion',
+      title: 'Información',
       children: <Widget>[
-        //All countries share the a title and country selector at the top of the form
-        FormSectionTitle('Informacion de Contacto'),
-        //Email Input
+        FormSectionTitle('Información de Contacto'),
         _buildText(FormKeys.email, type: InputType.email, required: true),
-        FormSectionTitle('Direccion de Entrega'),
-        //Country selector
+        FormSectionTitle('Dirección de Entrega'),
         AppDropdownMenu(
           key: ValueKey(FormKeys.country),
-          label: 'Pais / Region',
+          label: 'País / Región',
           options: _countries,
           defaultOption: _selectedCountry,
           onValidate: onItemValidate,
         ),
 
-        //Inject the country-specific fields into the list,
         ..._buildCountrySpecificFormElements(),
 
-        //Phone number is always last
-        _buildText(FormKeys.phone, title: "Numero de Celular", type: InputType.telephone),
+        _buildText(FormKeys.phone, title: "Número de Celular", type: InputType.telephone),
 
         SubmitButton(
             isErrorVisible: isFormErrorVisible,
-            child: Text('Continuar al pago', style: Styles.submitButtonText),
+            child: Text('Continuar al pago', style: FormStyles.submitButtonText),
             percentage: formCompletion,
             onPressed: () => _handleSubmit(context)),
       ],
@@ -91,49 +89,39 @@ class _CompraFormInformationState extends State<CompraFormInformation> with Form
         key: ValueKey(_countrySubdivisionKey),
         label: _countrySubdivisionKey,
         defaultOption: _getFormValue(_countrySubdivisionKey),
-        options: CountryData.getSubdivisionList(_countrySubdivisionKey),
+        options: CountryData.getSubdivisionsByCountry(_selectedCountry),
         onValidate: onItemValidate);
   }
 
   List<Widget> _buildCountrySpecificFormElements() {
-    var postalTitle = _selectedCountry == "Estados Unidos" ? "Zip Code" : "Codigo Postal";
+    var postalTitle = _selectedCountry == "Estados Unidos" ? "Zip Code" : "Código Postal";
     List<Widget> elements = [];
+    final hasSubdivision = CountryData.getSubdivisionTitle(_selectedCountry).isNotEmpty;
     switch (_selectedCountry) {
       case 'Estados Unidos':
-      case 'Canada':
+      case 'Canadá':
+      case 'México':
+      case 'Argentina':
+      case 'Brasil':
         elements = [
           _buildText(FormKeys.firstName),
           _buildText(FormKeys.lastName, required: true),
-          _buildText(FormKeys.address, required: true),
+          _buildText(FormKeys.address, title: "Dirección", required: true),
           _buildText(FormKeys.apt, title: "Apartamento, suite, etc."),
           _buildText(FormKeys.city, required: true),
           _buildSubdivisionDropdown(),
           _buildText(FormKeys.postal, title: postalTitle, required: true),
         ];
         break;
-      case 'Japon':
-        elements = [
-          _buildText(FormKeys.company),
-          _buildText(FormKeys.lastName, required: true),
-          _buildText(FormKeys.firstName),
-          _buildText(FormKeys.postal, title: postalTitle, required: true),
-          _buildSubdivisionDropdown(),
-          _buildText(FormKeys.city, required: true),
-          _buildText(FormKeys.address, required: true),
-          _buildText(FormKeys.apt, title: "Apartamento, suite, etc."),
-        ];
-        break;
-      case 'Francia':
+      default:
         elements = [
           _buildText(FormKeys.firstName),
           _buildText(FormKeys.lastName, required: true),
-          _buildText(FormKeys.company),
-          _buildText(FormKeys.address, required: true),
+          _buildText(FormKeys.address, title: "Dirección", required: true),
           _buildText(FormKeys.apt, title: "Apartamento, suite, etc."),
-          _buildText(FormKeys.postal, title: postalTitle, required: true),
           _buildText(FormKeys.city, required: true),
+          _buildText(FormKeys.postal, title: postalTitle, required: true),
         ];
-        break;
     }
     return elements;
   }

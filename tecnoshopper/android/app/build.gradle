@@ -1,8 +1,5 @@
 plugins {
     id "com.android.application"
-    // START: FlutterFire Configuration
-    id 'com.google.gms.google-services'
-    // END: FlutterFire Configuration
     id "kotlin-android"
     id "dev.flutter.flutter-gradle-plugin"
 }
@@ -27,16 +24,16 @@ if (flutterVersionName == null) {
 
 android {
     namespace "com.example.flutter_ces"
-    compileSdkVersion 34
+    compileSdkVersion 36
     ndkVersion flutter.ndkVersion
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '17'
     }
 
     sourceSets {
@@ -48,11 +45,11 @@ android {
         applicationId "com.example.flutter_ces"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
-        minSdkVersion 21
+        minSdkVersion flutter.minSdkVersion
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
-        testInstrumentationRunner "com.example.flutter_ces.AllurePatrolJUnitRunner"
+        testInstrumentationRunner "pl.leancode.patrol.PatrolJUnitRunner"
         testInstrumentationRunnerArguments clearPackageData: "false"
 
     }
@@ -76,8 +73,4 @@ flutter {
 }
 
 dependencies {
-    androidTestImplementation "io.qameta.allure:allure-kotlin-model:2.4.0"
-    androidTestImplementation "io.qameta.allure:allure-kotlin-commons:2.4.0"
-    androidTestImplementation "io.qameta.allure:allure-kotlin-junit4:2.4.0"
-    androidTestImplementation "io.qameta.allure:allure-kotlin-android:2.4.0"
 }

@@ -21,7 +21,7 @@ class SubmitButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: Styles.vtFormPadding).add(padding),
+      margin: EdgeInsets.symmetric(vertical: FormStyles.vtFormPadding).add(padding),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
@@ -40,20 +40,20 @@ class SubmitButton extends StatelessWidget {
                     axis: Axis.horizontal,
                     child: Container(
                       height: 48,
-                      decoration: BoxDecoration(color: Styles.secondaryColor, borderRadius: BorderRadius.circular(4)),
+                      decoration: BoxDecoration(color: FormStyles.secondaryColor, borderRadius: BorderRadius.circular(4)),
                     ),
                   ),
                 ),
                 child,
               ],
             ),
-            fillColor: Styles.primaryColor,
+            fillColor: FormStyles.primaryColor,
             onPressed: onPressed,
           ),
           if (isErrorVisible)
             Padding(
                 padding: EdgeInsets.only(top: 6.0),
-                child: Text('No has terminado de rellenar toda la informacion', style: Styles.formError))
+                child: Text('No has terminado de rellenar toda la informacion', style: FormStyles.formError))
         ],
       ),
     );

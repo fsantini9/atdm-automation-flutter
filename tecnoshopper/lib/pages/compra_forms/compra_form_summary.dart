@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_ces/pages/carrito_forms/carrito_provider.dart';
+import 'package:flutter_ces/providers/carrito_provider.dart';
 import 'package:flutter_ces/pages/compra_forms/compra_form_payment.dart';
-import 'package:flutter_ces/pages/compra_forms/orderSuccess.dart';
-import 'package:flutter_ces/pages/home_forms/productosPage.dart';
+import 'package:flutter_ces/pages/compra_forms/order_success.dart';
 import '../helpers/demo_data.dart';
 import 'package:provider/provider.dart';
 
@@ -35,8 +34,8 @@ class CompraFormSummary extends StatelessWidget {
         _buildOrderTotal(context),
         _buildOrderSpecialInstructions(context),
         SubmitButton(
-          padding: EdgeInsets.symmetric(horizontal: Styles.hzPadding),
-          child: Text('Siguiente', style: Styles.submitButtonText),
+          padding: EdgeInsets.symmetric(horizontal: FormStyles.hzPadding),
+          child: Text('Siguiente', style: FormStyles.submitButtonText),
           onPressed: () => _handleSubmit(context),
         ),
       ],
@@ -65,33 +64,51 @@ class CompraFormSummary extends StatelessWidget {
               width: 135,
               height: 135,
               decoration: BoxDecoration(
-                  border: Border.all(color: Styles.grayColor),
-                  borderRadius: BorderRadius.circular(4),
-                  image: DecorationImage(
-                      image: AssetImage('assets/control2.png'))),
+                border: Border.all(color: FormStyles.lightGrayColor),
+                borderRadius: BorderRadius.circular(12),
+                color: const Color(0xffEDF1F9),
+              ),
+              child: const Icon(
+                Icons.shopping_cart_outlined,
+                size: 64,
+                color: Color(0xff142047),
+              ),
             ),
             Positioned(
-                top: -10,
-                right: -10,
-                child: Container(
-                  width: 24,
-                  height: 24,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    color: Styles.grayColor,
+              top: -10,
+              right: -10,
+              child: Container(
+                width: 26,
+                height: 26,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(13),
+                  color: const Color(0xff142047),
+                ),
+                child: Center(
+                  child: Text(
+                    '${carrito.cantidad}',
+                    style: FormStyles.imageBatch.copyWith(fontSize: 13),
                   ),
-                  child: Center(child: Text('1', style: Styles.imageBatch)),
-                )),
+                ),
+              ),
+            ),
           ],
         ),
-        SizedBox(width: 36),
+        const SizedBox(width: 36),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text('Total', style: Styles.productName),
-            Text('\$${carrito.total}', style: Styles.productPrice)
+            Text(
+              'Tu carrito',
+              style: FormStyles.orderTotalLabel,
+            ),
+            const SizedBox(height: 4),
+            Text(
+              '\$${carrito.total}',
+              style: FormStyles.orderTotal,
+            ),
           ],
-        )
+        ),
       ],
     );
   }
@@ -103,16 +120,16 @@ class CompraFormSummary extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            Text('Subtotal', style: Styles.orderLabel),
-            Text('\$${carrito.total}', style: Styles.orderPrice),
+            Text('Subtotal', style: FormStyles.orderLabel),
+            Text('\$${carrito.total}', style: FormStyles.orderPrice),
           ],
         ),
         SizedBox(height: 12),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            Text('Entrega', style: Styles.orderLabel),
-            Text('GRATIS', style: Styles.orderPrice),
+            Text('Entrega', style: FormStyles.orderLabel),
+            Text('GRATIS', style: FormStyles.orderPrice),
           ],
         ),
       ],
@@ -126,8 +143,8 @@ class CompraFormSummary extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Text('Total', style: Styles.orderTotalLabel),
-          Text('\$${carrito.total}', style: Styles.orderTotal),
+          Text('Total', style: FormStyles.orderTotalLabel),
+          Text('\$${carrito.total}', style: FormStyles.orderTotal),
         ],
       ),
     );
@@ -143,8 +160,8 @@ class CompraFormSummary extends StatelessWidget {
       initialValue: values.containsKey(FormKeys.instructions)
           ? values[FormKeys.instructions]
           : "",
-      style: Styles.inputLabel,
-      decoration: Styles.getInputDecoration(helper: name),
+      style: FormStyles.inputLabel,
+      decoration: FormStyles.getInputDecoration(helper: name),
       minLines: 4,
       maxLines: 6,
     );

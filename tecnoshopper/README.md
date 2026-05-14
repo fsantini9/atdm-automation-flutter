@@ -6,7 +6,7 @@ Aplicación Flutter de e-commerce para productos electrónicos y tecnología.
 
 - **Catálogo de Productos**: Más de 30 productos tecnológicos (laptops, consolas, accesorios, componentes PC, periféricos)
 - **Carrito de Compras**: Agregar, eliminar y gestionar productos con gestión de estado vía Provider
-- **Autenticación de Usuarios**: Registro e inicio de sesión con Firebase Authentication
+- **Autenticación de Usuarios**: Registro e inicio de sesión con almacenamiento local en JSON
 - **Multiplataforma**: Soporte para Android, iOS, Web, Windows, macOS y Linux
 - **Pruebas de Integración**: Testing automatizado con Patrol
 
@@ -14,7 +14,6 @@ Aplicación Flutter de e-commerce para productos electrónicos y tecnología.
 
 - Flutter SDK >= 3.2.0
 - Dart SDK >= 3.2.0
-- Firebase CLI (para configuración)
 
 ## Estructura del Proyecto
 
@@ -27,13 +26,12 @@ lib/
 │   ├── compra_forms/    # Proceso de checkout y compra
 │   ├── home_forms/      # Página principal y demo
 │   ├── login_forms/     # Autenticación de usuarios
-│   └── helpers/         # Utilidades, Firebase config y opciones
+│   └── helpers/         # Utilidades y opciones
 ├── styles/              # Temas, colores y estilos globales
 └── main.dart            # Punto de entrada de la aplicación
 
 assets/
-├── productos.json       # Catálogo de productos
-└── users.json           # Datos de usuarios de ejemplo
+└── productos.json       # Catálogo de productos
 ```
 
 ## Dependencias Utilizadas
@@ -41,10 +39,8 @@ assets/
 | Paquete                                | Propósito                           |
 | -------------------------------------- | ----------------------------------- |
 | `provider`                             | Gestión de estado del carrito       |
-| `firebase_core` / `firebase_auth`      | Autenticación con Firebase          |
 | `flutter_masked_text2`                 | Máscaras de entrada de texto        |
 | `path_provider` / `shared_preferences` | Almacenamiento local                |
-| `permission_handler`                   | Gestión de permisos del dispositivo |
 | `patrol`                               | Testing de integración              |
 | `csv`                                  | Manejo de archivos CSV              |
 | `flutter_svg`                          | Renderizado de SVGs                 |
@@ -185,23 +181,8 @@ flutter build web --release
 flutter build windows --release
 ```
 
-## Configuración de Firebase
-
-La aplicación utiliza Firebase para autenticación. Se requiere:
-
-1. Crear un proyecto en [Firebase Console](https://console.firebase.google.com/)
-2. Agregar las apps Android/iOS/Web al proyecto
-3. Descargar y colocar los archivos de configuración:
-   - `google-services.json` → `android/app/`
-   - `GoogleService-Info.plist` → `ios/Runner/`
-4. Generar `lib/pages/helpers/firebase_options.dart` con FlutterFire CLI:
-   ```bash
-   flutterfire configure
-   ```
-
 ## Datos de Prueba
 
-El archivo `assets/users.json` contiene usuarios de ejemplo para pruebas locales.
 El catálogo de productos se carga desde `assets/productos.json` con más de 30 items.
 
 ## Licencia
