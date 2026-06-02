@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ces/providers/carrito_provider.dart';
-import 'package:flutter_ces/pages/compra_forms/compra_form_payment.dart';
-import 'package:flutter_ces/pages/compra_forms/order_success.dart';
 import '../helpers/demo_data.dart';
 import 'package:provider/provider.dart';
 
@@ -28,9 +26,9 @@ class CompraFormSummary extends StatelessWidget {
       title: 'Resumen de Pedido',
       children: <Widget>[
         _buildOrderSummary(context),
-        Separator(),
+        const Separator(),
         _buildOrderInfo(context),
-        Separator(),
+        const Separator(),
         _buildOrderTotal(context),
         _buildOrderSpecialInstructions(context),
         SubmitButton(
@@ -124,7 +122,7 @@ class CompraFormSummary extends StatelessWidget {
             Text('\$${carrito.total}', style: FormStyles.orderPrice),
           ],
         ),
-        SizedBox(height: 12),
+        const SizedBox(height: 12),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[

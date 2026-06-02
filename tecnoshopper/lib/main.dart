@@ -22,9 +22,9 @@ class MyApp extends StatelessWidget {
         title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,
         theme: AppTheme.theme,
-        home: CompraFormsDemo(),
+        home: const CompraFormsDemo(),
         routes: {
-          '/carrito': (context) => CarritoPage(),
+          '/carrito': (context) => const CarritoPage(),
         },
       ),
     );

@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_ces/models/producto.dart';
 
 class CarritoProvider with ChangeNotifier {
-  List<Producto> _items = [];
+  final List<Producto> _items = [];
 
   List<Producto> get items => _items;
 

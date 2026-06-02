@@ -9,7 +9,7 @@ class CheckBoxInput extends StatefulWidget {
   const CheckBoxInput({Key? key, required this.label, this.onChange}) : super(key: key);
 
   @override
-  _CheckBoxInputState createState() => _CheckBoxInputState();
+  State<CheckBoxInput> createState() => _CheckBoxInputState();
 }
 
 class _CheckBoxInputState extends State<CheckBoxInput> {

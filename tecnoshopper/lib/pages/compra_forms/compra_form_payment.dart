@@ -22,12 +22,11 @@ class CompraFormPayment extends StatefulWidget {
   const CompraFormPayment({Key? key, this.pageSize}) : super(key: key);
 
   @override
-  _CompraFormPaymentState createState() => _CompraFormPaymentState();
+  State<CompraFormPayment> createState() => _CompraFormPaymentState();
 }
 
 class _CompraFormPaymentState extends State<CompraFormPayment> with FormMixin {
   final _formKey = GlobalKey<FormState>();
-  String _errorText = '';
   CreditCardNetwork? _cardNetwork;
 
   late SharedFormState sharedState;
@@ -47,12 +46,12 @@ class _CompraFormPaymentState extends State<CompraFormPayment> with FormMixin {
       title: 'Pago',
       children: [
         Text('\$34.00', style: FormStyles.orderTotal),
-        Separator(),
+        const Separator(),
         _buildShippingSection(),
-        Separator(),
-        FormSectionTitle('Tarjeta de regalo o codigo de descuento'),
+        const Separator(),
+        const FormSectionTitle('Tarjeta de regalo o codigo de descuento'),
         _buildInputWithButton(),
-        FormSectionTitle('Pago', padding: EdgeInsets.only(bottom: 16)),
+        const FormSectionTitle('Pago', padding: EdgeInsets.only(bottom: 16)),
         CreditCardInfoInput(
           key: ValueKey(FormKeys.ccNumber),
           label: 'Numero de Tarjeta',
@@ -78,7 +77,7 @@ class _CompraFormPaymentState extends State<CompraFormPayment> with FormMixin {
               onValidate: onItemValidate,
               inputType: CreditCardInputType.expirationDate,
             )),
-            SizedBox(width: 24),
+            const SizedBox(width: 24),
             Expanded(
               child: CreditCardInfoInput(
                   key: ValueKey(FormKeys.ccCode),
@@ -90,8 +89,8 @@ class _CompraFormPaymentState extends State<CompraFormPayment> with FormMixin {
             ),
           ],
         ),
-        FormSectionTitle('Notificaciones de Compra'),
-        CheckBoxInput(label: 'Enviar actualizaciones de compra\n al Email'),
+        const FormSectionTitle('Notificaciones de Compra'),
+        const CheckBoxInput(label: 'Enviar actualizaciones de compra\n al Email'),
         _buildSubmitButton()
       ],
     );
@@ -103,9 +102,9 @@ class _CompraFormPaymentState extends State<CompraFormPayment> with FormMixin {
     values[key] = value ?? '';
 
     Future.delayed(
-      Duration(milliseconds: 500),
+      const Duration(milliseconds: 500),
       () {
-        if (this.mounted) {
+        if (mounted) {
           setState(() {
             formCompletion = super.countValidItems() / validInputsMap.length;
             if (formCompletion == 1) isFormErrorVisible = false;
@@ -121,7 +120,7 @@ class _CompraFormPaymentState extends State<CompraFormPayment> with FormMixin {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Container(
-              constraints: BoxConstraints(minWidth: 85),
+              constraints: const BoxConstraints(minWidth: 85),
               child: Text('Contacto', style: FormStyles.orderLabel)),
           Text(values[FormKeys.email] ?? '',
               overflow: TextOverflow.clip, style: FormStyles.orderPrice),
@@ -133,7 +132,7 @@ class _CompraFormPaymentState extends State<CompraFormPayment> with FormMixin {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Container(
-                constraints: BoxConstraints(minWidth: 85),
+                constraints: const BoxConstraints(minWidth: 85),
                 child: Text('Enviar a', style: FormStyles.orderLabel)),
             Text(_getShippingAddress(),
                 overflow: TextOverflow.clip, style: FormStyles.orderPrice),
@@ -144,7 +143,7 @@ class _CompraFormPaymentState extends State<CompraFormPayment> with FormMixin {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Container(
-              constraints: BoxConstraints(minWidth: 85),
+              constraints: const BoxConstraints(minWidth: 85),
               child: Text('Metodo', style: FormStyles.orderLabel)),
           Text('GRATIS', overflow: TextOverflow.clip, style: FormStyles.orderPrice),
         ],
@@ -187,8 +186,8 @@ class _CompraFormPaymentState extends State<CompraFormPayment> with FormMixin {
               elevation: 0,
               color: FormStyles.secondaryColor,
               height: 56,
-              child: Text('Aplicar', style: FormStyles.submitButtonText),
               onPressed: null,
+              child: Text('Aplicar', style: FormStyles.submitButtonText),
             ),
           ),
         )
@@ -198,6 +197,9 @@ class _CompraFormPaymentState extends State<CompraFormPayment> with FormMixin {
 
   Widget _buildSubmitButton() {
     return SubmitButton(
+      percentage: formCompletion,
+      isErrorVisible: isFormErrorVisible,
+      onPressed: _handleSubmit,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 18.0),
         child: Row(
@@ -208,9 +210,6 @@ class _CompraFormPaymentState extends State<CompraFormPayment> with FormMixin {
           ],
         ),
       ),
-      percentage: formCompletion,
-      isErrorVisible: isFormErrorVisible,
-      onPressed: _handleSubmit,
     );
   }
 
@@ -219,8 +218,8 @@ class _CompraFormPaymentState extends State<CompraFormPayment> with FormMixin {
       Navigator.push(
         context,
         StackPagesRoute(
-          previousPages: [CompraFormPayment(pageSize: .85)],
-          enterPage: OrderSuccessPage(),
+          previousPages: [const CompraFormPayment(pageSize: .85)],
+          enterPage: const OrderSuccessPage(),
         ),
       );
     } else {

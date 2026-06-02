@@ -14,7 +14,7 @@ class Bottom extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _BottomState createState() => _BottomState();
+  State<Bottom> createState() => _BottomState();
 }
 
 class _BottomState extends State<Bottom> {
@@ -23,7 +23,7 @@ class _BottomState extends State<Bottom> {
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
-      duration: Duration(milliseconds: 100),
+      duration: const Duration(milliseconds: 100),
       alignment: Alignment.center,
       width: double.infinity,
       height: _showSearchBar ? 150 : 100,
@@ -44,7 +44,7 @@ class _BottomState extends State<Bottom> {
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(30),
-                  boxShadow: [
+                  boxShadow: const [
                     BoxShadow(
                       color: Colors.black26,
                       blurRadius: 10,
@@ -53,11 +53,11 @@ class _BottomState extends State<Bottom> {
                   ],
                 ),
                 child: TextField(
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: 'Buscar...',
                     border: InputBorder.none,
                     contentPadding:
-                        EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                        const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                   ),
                   onChanged: widget.onSearchChanged,
                 ),
@@ -68,23 +68,23 @@ class _BottomState extends State<Bottom> {
             children: [
               IconButton(
                 onPressed: () {},
-                icon: Icon(Icons.home,
+                icon: const Icon(Icons.home,
                     color: HomeStyles.iconColor, size: HomeStyles.iconSize),
               ),
               IconButton(
                 onPressed: () =>
                     setState(() => _showSearchBar = !_showSearchBar),
-                icon: Icon(Icons.search,
+                icon: const Icon(Icons.search,
                     color: HomeStyles.iconColor, size: HomeStyles.iconSize),
               ),
               IconButton(
                 onPressed: widget.onAccountPressed,
-                icon: Icon(Icons.account_circle_outlined,
+                icon: const Icon(Icons.account_circle_outlined,
                     color: HomeStyles.iconColor, size: HomeStyles.iconSize),
               ),
               IconButton(
                 onPressed: widget.onCartPressed,
-                icon: Icon(Icons.shopping_cart_outlined,
+                icon: const Icon(Icons.shopping_cart_outlined,
                     color: HomeStyles.iconColor, size: HomeStyles.iconSize),
               ),
             ],

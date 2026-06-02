@@ -9,7 +9,7 @@ class SplashPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedSplashScreen(
       splash: 'assets/ces_logo_claro.png',
-      nextScreen: ProductosPage(),
+      nextScreen: const ProductosPage(),
       splashTransition: SplashTransition.fadeTransition,
     );
   }

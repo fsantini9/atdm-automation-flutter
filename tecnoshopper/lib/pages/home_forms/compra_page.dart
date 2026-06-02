@@ -11,7 +11,7 @@ import '../../styles/styles_home.dart';
 class CompraPage extends StatelessWidget {
   final Producto producto;
 
-  const CompraPage({required this.producto});
+  const CompraPage({super.key, required this.producto});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class _ProductPageTemplate extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () => _handleBack(context),
-          icon: Icon(Icons.arrow_back_ios),
+          icon: const Icon(Icons.arrow_back_ios),
           color: HomeStyles.appBarIconColor,
         ),
         toolbarHeight: 100,
@@ -42,7 +42,7 @@ class _ProductPageTemplate extends StatelessWidget {
           width: width / HomeStyles.appBarTitleWidthFraction,
         ),
         backgroundColor: HomeStyles.pageAppBarBackgroundColor,
-        actions: [],
+        actions: const [],
         elevation: 0,
       ),
       body: Container(
@@ -72,12 +72,12 @@ class _ProductContent extends StatelessWidget {
     final double height = MediaQuery.of(context).size.height;
 
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 30),
+      padding: const EdgeInsets.symmetric(horizontal: 30),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           // Imagen del producto
-          Container(
+          SizedBox(
             width: width * 0.70,
             height: height * 0.30,
             child: Image.asset(producto.imagen),
@@ -270,21 +270,21 @@ void _showPurchaseOptions(BuildContext context, Producto producto) {
       return Wrap(
         children: [
           ListTile(
-            title: Text('Google Play'),
-            leading: FaIcon(FontAwesomeIcons.googlePay),
-            trailing: FaIcon(FontAwesomeIcons.moneyBill),
+            title: const Text('Google Play'),
+            leading: const FaIcon(FontAwesomeIcons.googlePay),
+            trailing: const FaIcon(FontAwesomeIcons.moneyBill),
             onTap: () => _navigateToSummary(context, [producto]),
           ),
           ListTile(
-            title: Text('Apple Play'),
-            leading: FaIcon(FontAwesomeIcons.applePay),
-            trailing: FaIcon(FontAwesomeIcons.moneyBill),
+            title: const Text('Apple Play'),
+            leading: const FaIcon(FontAwesomeIcons.applePay),
+            trailing: const FaIcon(FontAwesomeIcons.moneyBill),
             onTap: () => _navigateToSummary(context, [producto]),
           ),
           ListTile(
-            title: Text('Paypal'),
-            leading: FaIcon(FontAwesomeIcons.paypal),
-            trailing: FaIcon(FontAwesomeIcons.moneyBill),
+            title: const Text('Paypal'),
+            leading: const FaIcon(FontAwesomeIcons.paypal),
+            trailing: const FaIcon(FontAwesomeIcons.moneyBill),
             onTap: () => _navigateToSummary(context, [producto]),
           ),
         ],
@@ -298,7 +298,7 @@ void _navigateToSummary(BuildContext context, List<Producto> productos) {
     context,
     StackPagesRoute(
       previousPages: [CompraPage(producto: productos.first)],
-      enterPage: CompraFormSummary(),
+      enterPage: const CompraFormSummary(),
     ),
   );
 }

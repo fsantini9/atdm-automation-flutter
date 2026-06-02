@@ -23,14 +23,14 @@ class StackPagesRoute extends PageRouteBuilder {
               children: <Widget>[
                 for (int i = 0; i < previousPages.length; i++)
                   SlideTransition(
-                    position: new Tween<Offset>(
+                    position: Tween<Offset>(
                       begin: Offset(0, ((previousPages.length - i) * -0.05) + 0.05),
                       end: Offset(0, (previousPages.length - i) * -0.05),
                     ).animate(CurvedAnimation(curve: Curves.easeInCubic, parent: animation)),
                     child: previousPages[i],
                   ),
                 SlideTransition(
-                  position: new Tween<Offset>(
+                  position: Tween<Offset>(
                     begin: const Offset(0, 1.0),
                     end: Offset.zero,
                   ).animate(animation),

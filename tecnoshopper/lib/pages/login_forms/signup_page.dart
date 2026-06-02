@@ -4,8 +4,10 @@ import 'package:flutter_ces/components/stack_pages_route.dart';
 import 'package:flutter_ces/pages/login_forms/login_page.dart';
 
 class SignupPage extends StatefulWidget {
+  const SignupPage({super.key});
+
   @override
-  _SignupPageState createState() => _SignupPageState();
+  State<SignupPage> createState() => _SignupPageState();
 }
 
 class _SignupPageState extends State<SignupPage> {
@@ -24,17 +26,17 @@ class _SignupPageState extends State<SignupPage> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              Column(
+              const Column(
                 children: <Widget>[
-                  const SizedBox(height: 60.0),
-                  const Text(
+                  SizedBox(height: 60.0),
+                  Text(
                     "Registrarse",
                     style: TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(
+                  SizedBox(
                     height: 20,
                   ),
                   Text(
@@ -94,8 +96,8 @@ class _SignupPageState extends State<SignupPage> {
                         Navigator.push(
                           context,
                           StackPagesRoute(
-                            previousPages: [SignupPage()],
-                            enterPage: LoginPage(),
+                            previousPages: [const SignupPage()],
+                            enterPage: const LoginPage(),
                           ),
                         );
                       },
@@ -117,15 +119,16 @@ class _SignupPageState extends State<SignupPage> {
     final String password = _passwordController.text.trim();
 
     if (await AuthService.isEmailRegistered(email)) {
+      if (!mounted) return;
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          title: Text('Error de registro'),
-          content: Text('El correo electrónico ya está registrado.'),
+          title: const Text('Error de registro'),
+          content: const Text('El correo electrónico ya está registrado.'),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: Text('OK'),
+              child: const Text('OK'),
             ),
           ],
         ),
@@ -136,21 +139,22 @@ class _SignupPageState extends State<SignupPage> {
     try {
       await AuthService.register(email, password);
 
+      if (!mounted) return;
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          title: Text('Registro exitoso'),
-          content: Text('¡Tu cuenta ha sido registrada correctamente!'),
+          title: const Text('Registro exitoso'),
+          content: const Text('¡Tu cuenta ha sido registrada correctamente!'),
           actions: [
             TextButton(
               onPressed: () => Navigator.push(
                 context,
                 StackPagesRoute(
-                  previousPages: [SignupPage()],
-                  enterPage: LoginPage(),
+                  previousPages: [const SignupPage()],
+                  enterPage: const LoginPage(),
                 ),
               ),
-              child: Text('OK'),
+              child: const Text('OK'),
             ),
           ],
         ),
@@ -159,8 +163,9 @@ class _SignupPageState extends State<SignupPage> {
       _emailController.clear();
       _passwordController.clear();
     } catch (e) {
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text(
               'Hubo un error al registrar. Por favor, inténtalo de nuevo.'),
         ),

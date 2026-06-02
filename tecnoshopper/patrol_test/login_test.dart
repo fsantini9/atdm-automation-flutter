@@ -1,25 +1,35 @@
+import 'package:flutter_ces/main.dart';
 import 'package:patrol/patrol.dart';
 
 import 'login_robot.dart';
 
 void main() {
-  patrolTest('Login Exitoso', ($) async {
-    final loginRobot = LoginRobot($);
+  const testEmail = 'test@tecnoshopper.com';
+  const testPassword = 'password123';
 
-    await loginRobot.ingresarEmail('usuario@test.com');
-    await loginRobot.presionarBotonLContinuar();
-    await loginRobot.ingresarPassword('123456');
-    await loginRobot.presionarBotonLContinuar();
-    await loginRobot.verificarInicioDeSesionExitoso();
-  });
+  patrolTest(
+    'login exitoso con credenciales validas',
+    ($) async {
+      await $.pumpWidgetAndSettle(const MyApp());
 
-  patrolTest('Login con credenciales inválidas', ($) async {
-    final loginRobot = LoginRobot($);
+      final robot = LoginRobot($);
+      await robot.ingresarEmail(testEmail);
+      await robot.ingresarPassword(testPassword);
+      await robot.presionarBotonLogin();
+      await robot.verificarInicioDeSesionExitoso();
+    },
+  );
 
-    await loginRobot.ingresarEmail('usuario@test.com');
-    await loginRobot.presionarBotonLContinuar();
-    await loginRobot.ingresarPassword('incorrecto');
-    await loginRobot.presionarBotonLContinuar();
-    await loginRobot.verificarMensajeDeError('Credenciales inválidas');
-  });
+  patrolTest(
+    'login fallido con credenciales invalidas',
+    ($) async {
+      await $.pumpWidgetAndSettle(const MyApp());
+
+      final robot = LoginRobot($);
+      await robot.ingresarEmail('incorrecto@test.com');
+      await robot.ingresarPassword('claveincorrecta');
+      await robot.presionarBotonLogin();
+      await robot.verificarMensajeDeError('Error de inicio de sesión');
+    },
+  );
 }

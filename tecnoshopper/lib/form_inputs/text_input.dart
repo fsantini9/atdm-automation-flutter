@@ -30,7 +30,7 @@ class TextInput extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _TextInputState createState() => _TextInputState();
+  State<TextInput> createState() => _TextInputState();
 }
 
 class _TextInputState extends State<TextInput> {
@@ -124,8 +124,8 @@ class _TextInputState extends State<TextInput> {
   String _getLabel() {
     String label = '';
     if (!widget.isRequired && _value.isEmpty) label = 'Opcional';
-    if (_value.isNotEmpty && widget.label.isEmpty ||
-        widget.initialValue.isNotEmpty) return widget.helper;
+    if ((_value.isNotEmpty && widget.label.isEmpty) ||
+        widget.initialValue.isNotEmpty) { return widget.helper; }
     return label;
   }
 
@@ -135,11 +135,12 @@ class _TextInputState extends State<TextInput> {
     widget.onChange?.call(_keyValue, value);
 
     // activate validation
-    Future.delayed(Duration(milliseconds: 100), () => setState(() {}));
-    if (!_isAutoValidating)
+    Future.delayed(const Duration(milliseconds: 100), () => setState(() {}));
+    if (!_isAutoValidating) {
       setState(() {
         _isAutoValidating = true;
       });
+    }
   }
 
   TextInputType? _setKeyboardType() {
@@ -151,13 +152,12 @@ class _TextInputState extends State<TextInput> {
       case InputType.telephone:
         type = TextInputType.numberWithOptions(decimal: true);
         break;
+
       case InputType.number:
         type = TextInputType.numberWithOptions(signed: true, decimal: true);
         break;
       case InputType.text:
         return TextInputType.text;
-      default:
-        return null;
     }
     return type;
   }
@@ -169,7 +169,7 @@ class _TextInputState extends State<TextInput> {
       isValid = false;
       _errorText = 'Requerido';
       // Update error label, wait a frame because this was causing markAsBuild errors
-      Future.delayed(Duration(milliseconds: 17), () => setState(() {}));
+      Future.delayed(const Duration(milliseconds: 17), () => setState(() {}));
       return _errorText;
     }
     // if it is optional

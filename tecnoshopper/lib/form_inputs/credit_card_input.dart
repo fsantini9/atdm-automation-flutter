@@ -29,11 +29,11 @@ class CreditCardInfoInput extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _CreditCardInfoInputState createState() => _CreditCardInfoInputState();
+  State<CreditCardInfoInput> createState() => _CreditCardInfoInputState();
 }
 
 class _CreditCardInfoInputState extends State<CreditCardInfoInput> {
-  MaskedTextController _textController = MaskedTextController(mask: '00');
+  late final MaskedTextController _textController;
   CreditCardNetwork? _creditCardType;
   bool _isAutoValidating = false;
   bool? _isValid;
@@ -44,7 +44,14 @@ class _CreditCardInfoInputState extends State<CreditCardInfoInput> {
   String get _keyValue => (widget.key as ValueKey).value as String;
 
   @override
-  dispose() {
+  void initState() {
+    super.initState();
+    _textController = MaskedTextController(mask: '00');
+  }
+
+  @override
+  void dispose() {
+    _textController.dispose();
     super.dispose();
   }
 
@@ -136,7 +143,7 @@ class _CreditCardInfoInputState extends State<CreditCardInfoInput> {
 
   void _handleChange(String value) {
     _value = value;
-    Future.delayed(Duration(milliseconds: 100), () => setState(() {}));
+    Future.delayed(const Duration(milliseconds: 100), () => setState(() {}));
     if (value.length == 2) _updateInputMask();
     if (!_isAutoValidating) {
       setState(() {
@@ -191,8 +198,9 @@ class _CreditCardInfoInputState extends State<CreditCardInfoInput> {
             _value.substring(0, 2) == '55') {
           _creditCardType = CreditCardNetwork.mastercard;
           _textController.updateMask('0000 0000 0000 0000');
-        } else
+        } else {
           _creditCardType = null;
+        }
         break;
       case CreditCardInputType.expirationDate:
         _textController.updateMask('00/00');

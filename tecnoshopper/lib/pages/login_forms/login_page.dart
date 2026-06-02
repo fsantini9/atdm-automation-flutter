@@ -7,8 +7,10 @@ import 'package:flutter_ces/pages/login_forms/splash.dart';
 import '../../components/stack_pages_route.dart';
 
 class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
+
   @override
-  _LoginPageState createState() => _LoginPageState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
@@ -76,22 +78,23 @@ class _DatosState extends State<Datos> {
 
     final success = await AuthService.login(email, password);
 
+    if (!mounted) return;
     if (success) {
       Navigator.push(
         context,
-        StackPagesRoute(previousPages: [LoginPage()], enterPage: SplashPage()),
+        StackPagesRoute(previousPages: [const LoginPage()], enterPage: const SplashPage()),
       );
     } else {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          title: Text('Error de inicio de sesión'),
+          title: const Text('Error de inicio de sesión'),
           content:
-              Text('El correo electrónico o la contraseña son incorrectos.'),
+              const Text('El correo electrónico o la contraseña son incorrectos.'),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: Text('OK'),
+              child: const Text('OK'),
             ),
           ],
         ),
@@ -116,7 +119,7 @@ class _DatosState extends State<Datos> {
               )),
           const SizedBox(height: 5),
           TextFormField(
-            key: Key('email_field'),
+            key: const ValueKey('email_field'),
             controller: _emailController,
             keyboardType: TextInputType.emailAddress,
             decoration: InputDecoration(
@@ -148,7 +151,7 @@ class _DatosState extends State<Datos> {
           ),
           const SizedBox(height: 5),
           TextFormField(
-            key: Key('password_field'),
+            key: const ValueKey('password_field'),
             obscureText: obs,
             controller: _passwordController,
             decoration: InputDecoration(
@@ -203,7 +206,7 @@ class _RememberState extends State<Remember> {
         const Spacer(),
         TextButton(
           onPressed: () {},
-          style: TextButton.styleFrom(foregroundColor: Color(0xff142047)),
+          style: TextButton.styleFrom(foregroundColor: const Color(0xff142047)),
           child: const Text('Olvidaste tu contraseña?'),
         ),
       ],
@@ -224,7 +227,7 @@ class Botones extends StatelessWidget {
           width: double.infinity,
           height: 50,
           child: ElevatedButton(
-            key: Key('login_button'),
+            key: const ValueKey('login_button'),
             onPressed: signInCallback,
             style: ButtonStyle(
               backgroundColor:
@@ -273,12 +276,12 @@ class Botones extends StatelessWidget {
             Navigator.push(
               context,
               StackPagesRoute(
-                previousPages: [LoginPage()],
-                enterPage: SignupPage(),
+                previousPages: [const LoginPage()],
+                enterPage: const SignupPage(),
               ),
             );
           },
-          style: TextButton.styleFrom(foregroundColor: Color(0xff142047)),
+          style: TextButton.styleFrom(foregroundColor: const Color(0xff142047)),
           child: const Text('¿Necesitás registrarte?'),
         ),
       ],

@@ -21,7 +21,7 @@ class CompraFormInformation extends StatefulWidget {
   const CompraFormInformation({Key? key, this.pageSize, this.isHidden = false}) : super(key: key);
 
   @override
-  _CompraFormInformationState createState() => _CompraFormInformationState();
+  State<CompraFormInformation> createState() => _CompraFormInformationState();
 }
 
 class _CompraFormInformationState extends State<CompraFormInformation> with FormMixin {
@@ -60,9 +60,9 @@ class _CompraFormInformationState extends State<CompraFormInformation> with Form
       pageSizeProportion: widget.pageSize ?? 0.85,
       title: 'Información',
       children: <Widget>[
-        FormSectionTitle('Información de Contacto'),
+        const FormSectionTitle('Información de Contacto'),
         _buildText(FormKeys.email, type: InputType.email, required: true),
-        FormSectionTitle('Dirección de Entrega'),
+        const FormSectionTitle('Dirección de Entrega'),
         AppDropdownMenu(
           key: ValueKey(FormKeys.country),
           label: 'País / Región',
@@ -77,9 +77,9 @@ class _CompraFormInformationState extends State<CompraFormInformation> with Form
 
         SubmitButton(
             isErrorVisible: isFormErrorVisible,
-            child: Text('Continuar al pago', style: FormStyles.submitButtonText),
             percentage: formCompletion,
-            onPressed: () => _handleSubmit(context)),
+            onPressed: () => _handleSubmit(context),
+            child: Text('Continuar al pago', style: FormStyles.submitButtonText)),
       ],
     );
   }
@@ -94,9 +94,8 @@ class _CompraFormInformationState extends State<CompraFormInformation> with Form
   }
 
   List<Widget> _buildCountrySpecificFormElements() {
-    var postalTitle = _selectedCountry == "Estados Unidos" ? "Zip Code" : "Código Postal";
+    final String postalTitle = _selectedCountry == "Estados Unidos" ? "Zip Code" : "Código Postal";
     List<Widget> elements = [];
-    final hasSubdivision = CountryData.getSubdivisionTitle(_selectedCountry).isNotEmpty;
     switch (_selectedCountry) {
       case 'Estados Unidos':
       case 'Canadá':
@@ -196,12 +195,13 @@ class _CompraFormInformationState extends State<CompraFormInformation> with Form
       Navigator.push(
           context,
           StackPagesRoute(previousPages: [
-            CompraFormSummary(isHidden: true, pageSize: .85),
-            CompraFormInformation(isHidden: true, pageSize: .85),
-          ], enterPage: CompraFormPayment()));
-    } else
+            const CompraFormSummary(isHidden: true, pageSize: .85),
+            const CompraFormInformation(isHidden: true, pageSize: .85),
+          ], enterPage: const CompraFormPayment()));
+    } else {
       setState(() {
         isFormErrorVisible = true;
       });
+    }
   }
 }

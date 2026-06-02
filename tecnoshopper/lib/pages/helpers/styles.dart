@@ -5,22 +5,22 @@ class FormStyles {
   static double hzPadding = 37;
   static double vtFormPadding = 18;
 
-  static Color primaryColor = Color(0xff00b27f);
-  static Color secondaryColor = Color(0xff007b80);
-  static Color baseColor = Color(0xff4a4a4a);
+  static const Color primaryColor = Color(0xff00b27f);
+  static const Color secondaryColor = Color(0xff007b80);
+  static const Color baseColor = Color(0xff4a4a4a);
 
-  static Color lightGrayColor = Color(0xffe6e6e6);
-  static Color grayColor = Color(0xff505050);
-  static Color darkGrayColor = Color(0xff2d2d2d);
+  static const Color lightGrayColor = Color(0xffe6e6e6);
+  static const Color grayColor = Color(0xff505050);
+  static const Color darkGrayColor = Color(0xff2d2d2d);
 
-  static Color helperColor = Color(0xff555555);
-  static Color optionalColor = Color(0xff007b80);
-  static Color errorColor = Color(0xffea6060);
+  static const Color helperColor = Color(0xff555555);
+  static const Color optionalColor = Color(0xff007b80);
+  static const Color errorColor = Color(0xffea6060);
 
   static final BoxDecoration formContainerDecoration = BoxDecoration(
     color: Colors.white,
-    boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 8)],
-    border: Border.all(color: Color(0xffd4d4d4)),
+    boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 8)],
+    border: Border.all(color: const Color(0xffd4d4d4)),
     borderRadius: BorderRadius.vertical(
       top: Radius.circular(FormStyles.formRadius),
     ),
@@ -98,11 +98,11 @@ class FormStyles {
   static InputDecoration getInputDecoration({String? helper}) {
     return InputDecoration(
       helperStyle: FormStyles.helperStyle,
-      focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: FormStyles.secondaryColor)),
-      errorBorder: OutlineInputBorder(borderSide: BorderSide(color: FormStyles.errorColor)),
-      enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: FormStyles.lightGrayColor)),
-      border: OutlineInputBorder(),
-      errorStyle: TextStyle(color: Colors.transparent),
+      focusedBorder: const OutlineInputBorder(borderSide: BorderSide(color: FormStyles.secondaryColor)),
+      errorBorder: const OutlineInputBorder(borderSide: BorderSide(color: FormStyles.errorColor)),
+      enabledBorder: const OutlineInputBorder(borderSide: BorderSide(color: FormStyles.lightGrayColor)),
+      border: const OutlineInputBorder(),
+      errorStyle: const TextStyle(color: Colors.transparent),
       helperText: '',
       hintText: helper,
       hintStyle: FormStyles.helperStyle,

@@ -13,7 +13,7 @@ class AppDropdownMenu extends StatefulWidget {
       : super(key: key);
 
   @override
-  _AppDropdownMenuState createState() => _AppDropdownMenuState();
+  State<AppDropdownMenu> createState() => _AppDropdownMenuState();
 }
 
 class _AppDropdownMenuState extends State<AppDropdownMenu> {
@@ -37,7 +37,7 @@ class _AppDropdownMenuState extends State<AppDropdownMenu> {
     if (_isValid == null && _selectedOption!.isNotEmpty) {
       isValid = true;
     }
-    var items = _buildMenuItems();
+    final items = _buildMenuItems();
     //items.forEach((i)=>debugPrint("----> ${i.value}"));
 
     return Stack(
@@ -46,16 +46,16 @@ class _AppDropdownMenuState extends State<AppDropdownMenu> {
         DropdownButtonFormField<String>(
           key: UniqueKey(),
           onChanged: (val) {},
-          value: _selectedOption,
+          initialValue: _selectedOption,
           items: items,
           validator: _validate,
           decoration: InputDecoration(
-            contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: FormStyles.secondaryColor)),
-            errorBorder: OutlineInputBorder(borderSide: BorderSide(color: FormStyles.errorColor)),
-            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: FormStyles.lightGrayColor)),
-            border: OutlineInputBorder(),
-            errorStyle: TextStyle(color: Colors.transparent),
+            contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+            focusedBorder: const OutlineInputBorder(borderSide: BorderSide(color: FormStyles.secondaryColor)),
+            errorBorder: const OutlineInputBorder(borderSide: BorderSide(color: FormStyles.errorColor)),
+            enabledBorder: const OutlineInputBorder(borderSide: BorderSide(color: FormStyles.lightGrayColor)),
+            border: const OutlineInputBorder(),
+            errorStyle: const TextStyle(color: Colors.transparent),
             helperText: '',
             hintText: widget.label,
             hintStyle: FormStyles.helperStyle,
@@ -79,7 +79,7 @@ class _AppDropdownMenuState extends State<AppDropdownMenu> {
   }
 
   List<DropdownMenuItem<String>> _buildMenuItems() {
-    var items = widget.options.map((o) {
+    final items = widget.options.map((o) {
       return DropdownMenuItem(
         value: o,
         child: Text(o, style: FormStyles.orderTotalLabel),
@@ -89,10 +89,11 @@ class _AppDropdownMenuState extends State<AppDropdownMenu> {
   }
 
   String? _validate(value) {
-    if (value == null)
+    if (value == null) {
       return 'hay un error';
-    else
+    } else {
       return null;
+    }
   }
 
   _showOptions() async {
@@ -120,7 +121,7 @@ class DropdownOptions extends StatefulWidget {
   const DropdownOptions({Key? key, required this.title, required this.options, this.selectedOption}) : super(key: key);
 
   @override
-  _DropdownOptionsState createState() => _DropdownOptionsState();
+  State<DropdownOptions> createState() => _DropdownOptionsState();
 }
 
 class _DropdownOptionsState extends State<DropdownOptions> {
@@ -142,12 +143,12 @@ class _DropdownOptionsState extends State<DropdownOptions> {
         title: Center(child: Text(widget.title, style: FormStyles.optionsTitle)),
         actions: <Widget>[
           TextButton(
-            child: Text('Listo', style: FormStyles.textButton),
             onPressed: _sendSelectedOption,
+            child: Text('Listo', style: FormStyles.textButton),
           )
         ],
       ),
-      backgroundColor: Color(0xfff4f4f4),
+      backgroundColor: const Color(0xfff4f4f4),
       body: Container(
         decoration: BoxDecoration(border: Border(top: BorderSide(color: FormStyles.grayColor))),
         child: Flex(
@@ -168,7 +169,7 @@ class _DropdownOptionsState extends State<DropdownOptions> {
     return GestureDetector(
       onTap: () => _selectOption(option),
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 40, vertical: 12),
+        padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 12),
         decoration:
             BoxDecoration(color: Colors.white, border: Border(bottom: BorderSide(color: FormStyles.lightGrayColor))),
         child: Row(
@@ -183,10 +184,11 @@ class _DropdownOptionsState extends State<DropdownOptions> {
   }
 
   void _sendSelectedOption() {
-    if (_selectedOption.isNotEmpty)
+    if (_selectedOption.isNotEmpty) {
       Navigator.pop(context, _selectedOption);
-    else
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Selecciona una de las opciones')));
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Selecciona una de las opciones')));
+    }
   }
 
   void _selectOption(String option) {

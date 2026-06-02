@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 class HomeStyles {
   //AppBar Styles
-  static final appBarLeadingIconColor = Colors.black;
-  static final appBarBackgroundColor = Colors.white;
-  static final appBarElevation = 0.0;
-  static final appBarTitleImageWidthRatio = 1 / 3;
+  static const appBarLeadingIconColor = Colors.black;
+  static const appBarBackgroundColor = Colors.white;
+  static const appBarElevation = 0.0;
+  static const appBarTitleImageWidthRatio = 1 / 3;
   static final appBarTitleImage = Image.asset('assets/ces_logo_claro.png');
-  static final appBarActionsColor = Colors.black;
+  static const appBarActionsColor = Colors.black;
 
   //Producto Styles
   static final BoxDecoration productoDecoration = BoxDecoration(
@@ -16,16 +16,16 @@ class HomeStyles {
     boxShadow: [
       BoxShadow(
         color: Colors.grey.shade200,
-        offset: Offset(2, 2),
+        offset: const Offset(2, 2),
         spreadRadius: 5,
         blurRadius: 5,
       ),
     ],
   );
-  static final TextStyle nombreTextStyle = TextStyle(
+  static final TextStyle nombreTextStyle = const TextStyle(
       fontSize: 14, fontWeight: FontWeight.w600, color: Colors.black87);
   static final TextStyle infoTextStyle =
-      TextStyle(color: Color(0xFF555555), fontSize: 12);
+      const TextStyle(color: Color(0xFF555555), fontSize: 12);
 
   //Bottom Styles
   static const Color backgroundColor = Color(0xff21262E);

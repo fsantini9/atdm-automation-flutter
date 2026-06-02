@@ -28,6 +28,8 @@ class SubmitButton extends StatelessWidget {
           RawMaterialButton(
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
             elevation: 0,
+            fillColor: FormStyles.primaryColor,
+            onPressed: onPressed,
             child: Stack(
               alignment: Alignment.center,
               children: <Widget>[
@@ -47,8 +49,6 @@ class SubmitButton extends StatelessWidget {
                 child,
               ],
             ),
-            fillColor: FormStyles.primaryColor,
-            onPressed: onPressed,
           ),
           if (isErrorVisible)
             Padding(

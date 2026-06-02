@@ -20,7 +20,7 @@ class AppTheme {
         ),
         inputDecorationTheme: InputDecorationTheme(
           filled: true,
-          fillColor: AppColors.primaryDark.withOpacity(0.1),
+          fillColor: AppColors.primaryDark.withValues(alpha: 0.1),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(18),
             borderSide: BorderSide.none,

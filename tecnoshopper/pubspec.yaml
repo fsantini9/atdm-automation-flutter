@@ -73,9 +73,10 @@ flutter:
     - assets/
     - assets/products/
     - assets/productos.json
-  #   - images/a_dot_ham.jpeg
+
 patrol:
-  app_name: My App
+  app_name: TecnoShopper
+  test_dir: patrol_test
   android:
     package_name: com.example.flutter_ces
   ios:

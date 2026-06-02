@@ -67,8 +67,8 @@ class FormPage extends StatelessWidget {
                         child: Form(
                           key: formKey,
                           child: SingleChildScrollView(
-                            padding: EdgeInsets.symmetric(vertical: 20.0),
-                            physics: BouncingScrollPhysics(),
+                            padding: const EdgeInsets.symmetric(vertical: 20.0),
+                            physics: const BouncingScrollPhysics(),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: children,

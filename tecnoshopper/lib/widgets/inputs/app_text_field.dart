@@ -26,7 +26,7 @@ class AppTextField extends StatelessWidget {
           borderRadius: BorderRadius.circular(18),
           borderSide: BorderSide.none,
         ),
-        fillColor: AppColors.primaryDark.withOpacity(0.1),
+        fillColor: AppColors.primaryDark.withValues(alpha: 0.1),
         filled: true,
         prefixIcon: Icon(prefixIcon),
       ),

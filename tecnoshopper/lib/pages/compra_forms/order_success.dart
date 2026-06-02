@@ -3,32 +3,34 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_ces/pages/home_forms/productos_page.dart';
 
 class OrderSuccessPage extends StatelessWidget {
+  const OrderSuccessPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pedido Exitoso'),
+        title: const Text('Pedido Exitoso'),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              padding: EdgeInsets.all(16),
-              margin: EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.all(16),
+              margin: const EdgeInsets.symmetric(horizontal: 20),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(15),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
+                    color: Colors.grey.withValues(alpha: 0.5),
                     spreadRadius: 5,
                     blurRadius: 7,
-                    offset: Offset(0, 3),
+                    offset: const Offset(0, 3),
                   ),
                 ],
               ),
-              child: Text(
+              child: const Text(
                 '¡Tu pedido ha sido procesado con éxito!',
                 textAlign: TextAlign.center,
                 style: TextStyle(
@@ -51,7 +53,7 @@ class OrderSuccessPage extends StatelessWidget {
             const SizedBox(height: 48),
             ElevatedButton.icon(
               onPressed: () => Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(builder: (_) => ProductosPage()),
+                MaterialPageRoute(builder: (_) => const ProductosPage()),
                 (_) => false,
               ),
               style: ElevatedButton.styleFrom(

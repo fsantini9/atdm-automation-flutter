@@ -10,12 +10,14 @@ import '../../components/stack_pages_route.dart';
 import 'package:flutter_ces/styles/styles_home.dart';
 
 class ProductosPage extends StatefulWidget {
+  const ProductosPage({super.key});
+
   @override
-  _ProductosPageState createState() => _ProductosPageState();
+  State<ProductosPage> createState() => _ProductosPageState();
 }
 
 class _ProductosPageState extends State<ProductosPage> {
-  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   List<Producto> _productos = [];
   List<Producto> _filteredProductos = [];
   bool _showAccountPage = false;
@@ -70,7 +72,6 @@ class _ProductosPageState extends State<ProductosPage> {
 
   @override
   Widget build(BuildContext context) {
-    final double width = MediaQuery.of(context).size.width;
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
@@ -91,11 +92,11 @@ class _ProductosPageState extends State<ProductosPage> {
           Visibility(
             visible: !_showAccountPage,
             child: _isLoading
-                ? Center(child: CircularProgressIndicator())
+                ? const Center(child: CircularProgressIndicator())
                 : _filteredProductos.isEmpty
-                    ? Center(child: Text('No se encontraron productos'))
+                    ? const Center(child: Text('No se encontraron productos'))
                     : SingleChildScrollView(
-                        physics: BouncingScrollPhysics(),
+                        physics: const BouncingScrollPhysics(),
                         child: ProductosList(
                           productos: _filteredProductos,
                           onProductoTap: _navigateToCompraPage,

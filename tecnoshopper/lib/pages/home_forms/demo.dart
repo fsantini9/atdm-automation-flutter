@@ -5,8 +5,10 @@ import 'package:provider/provider.dart';
 import '../../components/stack_pages_route.dart';
 
 class CompraFormsDemo extends StatefulWidget {
+  const CompraFormsDemo({super.key});
+
   @override
-  _CompraFormsDemoState createState() => _CompraFormsDemoState();
+  State<CompraFormsDemo> createState() => _CompraFormsDemoState();
 }
 
 class SharedFormState {
@@ -16,7 +18,7 @@ class SharedFormState {
 }
 
 class _CompraFormsDemoState extends State<CompraFormsDemo> {
-  GlobalKey<NavigatorState> navKey = new GlobalKey();
+  final GlobalKey<NavigatorState> navKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
