@@ -87,6 +87,7 @@ class _AccountPageState extends State<AccountPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               TextField(
+                key: const ValueKey('nombre_field'),
                 controller: _nombreController,
                 decoration: InputDecoration(
                     hintText: "Nombre",
@@ -99,6 +100,7 @@ class _AccountPageState extends State<AccountPage> {
               ),
               const SizedBox(height: 16.0),
               TextField(
+                key: const ValueKey('apellido_field'),
                 controller: _apellidoController,
                 decoration: InputDecoration(
                     hintText: "Apellido",
@@ -111,6 +113,7 @@ class _AccountPageState extends State<AccountPage> {
               ),
               const SizedBox(height: 16.0),
               TextField(
+                key: const ValueKey('telefono_field'),
                 controller: _telefonoController,
                 decoration: InputDecoration(
                     hintText: "Teléfono",
@@ -123,6 +126,7 @@ class _AccountPageState extends State<AccountPage> {
               ),
               const SizedBox(height: 16.0),
               TextField(
+                key: const ValueKey('fecha_nacimiento_field'),
                 controller: _dateNacController,
                 decoration: InputDecoration(
                     hintText: "Fecha de Nacimiento",
@@ -135,6 +139,7 @@ class _AccountPageState extends State<AccountPage> {
               ),
               const SizedBox(height: 16.0),
               TextField(
+                key: const ValueKey('direccion_field'),
                 controller: _direccionController,
                 decoration: InputDecoration(
                     hintText: "Dirección",
@@ -147,6 +152,7 @@ class _AccountPageState extends State<AccountPage> {
               ),
               const SizedBox(height: 16.0),
               TextField(
+                key: const ValueKey('pais_field'),
                 controller: _paisController,
                 decoration: InputDecoration(
                     hintText: "País",
@@ -160,6 +166,7 @@ class _AccountPageState extends State<AccountPage> {
               const SizedBox(height: 32.0),
               Center(
                 child: ElevatedButton(
+                  key: const ValueKey('guardar_perfil_button'),
                   onPressed: _saveUserProfile,
                   style: ElevatedButton.styleFrom(
                     shape: const StadiumBorder(),

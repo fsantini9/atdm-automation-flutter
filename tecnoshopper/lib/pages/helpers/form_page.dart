@@ -28,6 +28,7 @@ class FormPage extends StatelessWidget {
           Align(
             alignment: Alignment.topCenter,
             child: GestureDetector(
+              key: const ValueKey('back_form_button'),
               onTap: () => _handleBackGesture(context),
               child: Container(
                 width: double.infinity,
@@ -41,8 +42,8 @@ class FormPage extends StatelessWidget {
           child: GestureDetector(
             onTap: () => _handleTap(context),
             child: Container(
-              padding:
-                  EdgeInsets.symmetric(horizontal: FormStyles.hzPadding).add(EdgeInsets.only(top: FormStyles.vtFormPadding)),
+              padding: EdgeInsets.symmetric(horizontal: FormStyles.hzPadding)
+                  .add(EdgeInsets.only(top: FormStyles.vtFormPadding)),
               width: screenSize.width,
               height: screenSize.height * pageSizeProportion,
               decoration: FormStyles.formContainerDecoration,
@@ -60,7 +61,8 @@ class FormPage extends StatelessWidget {
                         ).createShader(bounds),
                         child: Text(
                           title.toUpperCase(),
-                          style: FormStyles.formTitle.copyWith(color: Colors.white, fontSize: 22),
+                          style: FormStyles.formTitle
+                              .copyWith(color: Colors.white, fontSize: 22),
                         ),
                       ),
                       Expanded(
@@ -87,7 +89,8 @@ class FormPage extends StatelessWidget {
 
   _handleTap(BuildContext context) {
     //To improve user experience, we'll unfocus any textfields when the users taps oon the background of the form
-    if (MediaQuery.of(context).viewInsets.bottom > 0) SystemChannels.textInput.invokeMethod('TextInput.hide');
+    if (MediaQuery.of(context).viewInsets.bottom > 0)
+      SystemChannels.textInput.invokeMethod('TextInput.hide');
     WidgetsBinding.instance.focusManager.primaryFocus?.unfocus();
   }
 

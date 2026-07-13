@@ -18,13 +18,15 @@ class CompraFormInformation extends StatefulWidget {
   final double? pageSize;
   final bool isHidden;
 
-  const CompraFormInformation({Key? key, this.pageSize, this.isHidden = false}) : super(key: key);
+  const CompraFormInformation({Key? key, this.pageSize, this.isHidden = false})
+      : super(key: key);
 
   @override
   State<CompraFormInformation> createState() => _CompraFormInformationState();
 }
 
-class _CompraFormInformationState extends State<CompraFormInformation> with FormMixin {
+class _CompraFormInformationState extends State<CompraFormInformation>
+    with FormMixin {
   final _formKey = GlobalKey<FormState>();
 
   late SharedFormState formState;
@@ -53,7 +55,8 @@ class _CompraFormInformationState extends State<CompraFormInformation> with Form
 
   @override
   Widget build(BuildContext context) {
-    debugPrint("Rebuilding information @ ${DateTime.now().millisecondsSinceEpoch}");
+    debugPrint(
+        "Rebuilding information @ ${DateTime.now().millisecondsSinceEpoch}");
     return FormPage(
       formKey: _formKey,
       isHidden: widget.isHidden,
@@ -70,16 +73,16 @@ class _CompraFormInformationState extends State<CompraFormInformation> with Form
           defaultOption: _selectedCountry,
           onValidate: onItemValidate,
         ),
-
         ..._buildCountrySpecificFormElements(),
-
-        _buildText(FormKeys.phone, title: "Número de Celular", type: InputType.telephone),
-
+        _buildText(FormKeys.phone,
+            title: "Número de Celular", type: InputType.telephone),
         SubmitButton(
+            key: const ValueKey('continue_payment_button'),
             isErrorVisible: isFormErrorVisible,
             percentage: formCompletion,
             onPressed: () => _handleSubmit(context),
-            child: Text('Continuar al pago', style: FormStyles.submitButtonText)),
+            child:
+                Text('Continuar al pago', style: FormStyles.submitButtonText)),
       ],
     );
   }
@@ -94,7 +97,8 @@ class _CompraFormInformationState extends State<CompraFormInformation> with Form
   }
 
   List<Widget> _buildCountrySpecificFormElements() {
-    final String postalTitle = _selectedCountry == "Estados Unidos" ? "Zip Code" : "Código Postal";
+    final String postalTitle =
+        _selectedCountry == "Estados Unidos" ? "Zip Code" : "Código Postal";
     List<Widget> elements = [];
     switch (_selectedCountry) {
       case 'Estados Unidos':
@@ -125,7 +129,8 @@ class _CompraFormInformationState extends State<CompraFormInformation> with Form
     return elements;
   }
 
-  TextInput _buildText(String key, {String? title, bool required = false, InputType type = InputType.text}) {
+  TextInput _buildText(String key,
+      {String? title, bool required = false, InputType type = InputType.text}) {
     title = title ?? _snakeToTitleCase(key);
     // Register the input validity
     if (!validInputsMap.containsKey(key)) validInputsMap[key] = !required;
@@ -185,8 +190,10 @@ class _CompraFormInformationState extends State<CompraFormInformation> with Form
     //Get the key for this country
     _countrySubdivisionKey = CountryData.getSubdivisionTitle(country);
     //Select default is nothing is currently set
-    if (!values.containsKey(_countrySubdivisionKey) && _countrySubdivisionKey.isNotEmpty) {
-      values[_countrySubdivisionKey] = CountryData.getSubdivisionList(_countrySubdivisionKey)[0];
+    if (!values.containsKey(_countrySubdivisionKey) &&
+        _countrySubdivisionKey.isNotEmpty) {
+      values[_countrySubdivisionKey] =
+          CountryData.getSubdivisionList(_countrySubdivisionKey)[0];
     }
   }
 

@@ -32,6 +32,7 @@ class CompraFormSummary extends StatelessWidget {
         _buildOrderTotal(context),
         _buildOrderSpecialInstructions(context),
         SubmitButton(
+          key: const ValueKey('next_button'),
           padding: EdgeInsets.symmetric(horizontal: FormStyles.hzPadding),
           child: Text('Siguiente', style: FormStyles.submitButtonText),
           onPressed: () => _handleSubmit(context),

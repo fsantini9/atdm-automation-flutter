@@ -197,6 +197,7 @@ class _CompraFormPaymentState extends State<CompraFormPayment> with FormMixin {
 
   Widget _buildSubmitButton() {
     return SubmitButton(
+      key: const ValueKey('buy_button'),
       percentage: formCompletion,
       isErrorVisible: isFormErrorVisible,
       onPressed: _handleSubmit,

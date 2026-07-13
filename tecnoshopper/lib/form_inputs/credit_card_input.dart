@@ -46,7 +46,20 @@ class _CreditCardInfoInputState extends State<CreditCardInfoInput> {
   @override
   void initState() {
     super.initState();
-    _textController = MaskedTextController(mask: '00');
+
+    switch (widget.inputType) {
+      case CreditCardInputType.number:
+        _textController = MaskedTextController(mask: '0000 0000 0000 0000');
+        break;
+
+      case CreditCardInputType.expirationDate:
+        _textController = MaskedTextController(mask: '00/00');
+        break;
+
+      case CreditCardInputType.securityCode:
+        _textController = MaskedTextController(mask: '000');
+        break;
+    }
   }
 
   @override
@@ -79,7 +92,8 @@ class _CreditCardInfoInputState extends State<CreditCardInfoInput> {
         children: <Widget>[
           if (widget.label.isNotEmpty)
             Positioned(
-                top: -24, child: Text(widget.label, style: FormStyles.inputLabel)),
+                top: -24,
+                child: Text(widget.label, style: FormStyles.inputLabel)),
           TextFormField(
             controller: _textController,
             //initialValue: widget.initialValue,
@@ -102,14 +116,15 @@ class _CreditCardInfoInputState extends State<CreditCardInfoInput> {
           Positioned(
             top: 6,
             left: 12,
-            child: Text(_getLabel().toUpperCase(), style: FormStyles.labelOptional),
+            child: Text(_getLabel().toUpperCase(),
+                style: FormStyles.labelOptional),
           ),
           if (_errorText.isNotEmpty)
             Positioned(
               top: 8,
               right: 14,
-              child:
-                  Text(_errorText.toUpperCase(), style: FormStyles.labelNotValid),
+              child: Text(_errorText.toUpperCase(),
+                  style: FormStyles.labelNotValid),
             ),
           if (widget.inputType == CreditCardInputType.number)
             Positioned(
@@ -144,7 +159,7 @@ class _CreditCardInfoInputState extends State<CreditCardInfoInput> {
   void _handleChange(String value) {
     _value = value;
     Future.delayed(const Duration(milliseconds: 100), () => setState(() {}));
-    if (value.length == 2) _updateInputMask();
+  //  if (value.length == 2) _updateInputMask();
     if (!_isAutoValidating) {
       setState(() {
         _isAutoValidating = true;

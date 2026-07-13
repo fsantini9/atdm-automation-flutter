@@ -56,8 +56,8 @@ class _BottomState extends State<Bottom> {
                   decoration: const InputDecoration(
                     hintText: 'Buscar...',
                     border: InputBorder.none,
-                    contentPadding:
-                        const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                    contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 15),
                   ),
                   onChanged: widget.onSearchChanged,
                 ),
@@ -78,11 +78,13 @@ class _BottomState extends State<Bottom> {
                     color: HomeStyles.iconColor, size: HomeStyles.iconSize),
               ),
               IconButton(
+                key: const ValueKey('profile_button'),
                 onPressed: widget.onAccountPressed,
                 icon: const Icon(Icons.account_circle_outlined,
                     color: HomeStyles.iconColor, size: HomeStyles.iconSize),
               ),
               IconButton(
+                key: const ValueKey('cart_button'),
                 onPressed: widget.onCartPressed,
                 icon: const Icon(Icons.shopping_cart_outlined,
                     color: HomeStyles.iconColor, size: HomeStyles.iconSize),

@@ -48,6 +48,7 @@ class _SignupPageState extends State<SignupPage> {
               Column(
                 children: <Widget>[
                   TextField(
+                    key: const ValueKey('register_email_field'),
                     controller: _emailController,
                     decoration: InputDecoration(
                         hintText: "Email",
@@ -60,6 +61,7 @@ class _SignupPageState extends State<SignupPage> {
                   ),
                   const SizedBox(height: 20),
                   TextField(
+                    key: const ValueKey('register_password_field'),
                     controller: _passwordController,
                     decoration: InputDecoration(
                       hintText: "Contraseña",
@@ -76,6 +78,7 @@ class _SignupPageState extends State<SignupPage> {
                 ],
               ),
               ElevatedButton(
+                key: const ValueKey('register_button'),
                 onPressed: () => _signUp(context),
                 style: ElevatedButton.styleFrom(
                   shape: const StadiumBorder(),

@@ -73,6 +73,7 @@ flutter:
     - assets/
     - assets/products/
     - assets/productos.json
+    - assets/test_data/user.json
 
 dependency_overrides:
   page_transition: 2.2.2

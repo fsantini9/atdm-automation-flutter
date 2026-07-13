@@ -135,6 +135,7 @@ class CarritoPage extends StatelessWidget {
                   ),
                 ),
                 ElevatedButton(
+                  key: const ValueKey('checkout_button'),
                   onPressed:
                       isCarritoVacio ? null : () => _handleSubmit(context),
                   style: ElevatedButton.styleFrom(

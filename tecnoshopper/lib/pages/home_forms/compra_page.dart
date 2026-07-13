@@ -31,6 +31,7 @@ class _ProductPageTemplate extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
+          key: const ValueKey('back_button'),
           onPressed: () => _handleBack(context),
           icon: const Icon(Icons.arrow_back_ios),
           color: HomeStyles.appBarIconColor,
@@ -205,6 +206,7 @@ class _PurchaseButtons extends StatelessWidget {
         children: [
           Expanded(
             child: ElevatedButton.icon(
+              key: const ValueKey('add_to_cart_button'),
               onPressed: () {
                 Provider.of<CarritoProvider>(context, listen: false)
                     .agregarProducto(producto);
