@@ -1,3 +1,4 @@
+import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_ces/main.dart';
 import 'package:patrol/patrol.dart';
 
@@ -6,8 +7,10 @@ import '../../mcp/mcp_client.dart';
 import '../robot/perfil_robot.dart';
 
 void main() {
+  group('Suite Perfil', () {
   patrolTest(
     'configurar y guardar información personal',
+    tags: ['smoke', 'regression'],
     ($) async {
       final user = await McpClient.getTestUser();
 
@@ -44,6 +47,7 @@ void main() {
 //EL SIGUIENTE TEST VA A FALLAR PORQUE EL SISTEMA TIENE UN BUG Y NO CONTROLA LOS CAMPOS VACÍOS:
   patrolTest(
     'configurar información personal con campos vacíos',
+    tags: ['regression'],
     ($) async {
       final user = await McpClient.getTestUser();
 
@@ -70,4 +74,5 @@ void main() {
       await perfilRobot.verificarQueNoSeActualizoElPerfil();
     },
   );
+  });
 }

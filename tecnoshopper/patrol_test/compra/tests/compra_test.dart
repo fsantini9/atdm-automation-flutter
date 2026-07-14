@@ -1,3 +1,4 @@
+import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_ces/main.dart';
 import 'package:patrol/patrol.dart';
 
@@ -7,8 +8,10 @@ import '../robot/compra_robot.dart';
 import '../robot/productos_robot.dart';
 
 void main() {
+  group('Suite Compra', () {
   patrolTest(
     'compra exitosa',
+    tags: ['smoke', 'regression'],
     ($) async {
       final user = await McpClient.getTestUser();
 
@@ -59,6 +62,7 @@ void main() {
 
    patrolTest(
     'compra cancelada',
+    tags: ['regression'],
     ($) async {
       final user = await McpClient.getTestUser();
 
@@ -111,4 +115,5 @@ void main() {
       await productosRobot.verificarCarritoVisible();
     },
   );
+  });
 }

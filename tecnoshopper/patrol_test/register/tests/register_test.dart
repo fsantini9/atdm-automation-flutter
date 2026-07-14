@@ -1,12 +1,14 @@
+import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_ces/main.dart';
 import 'package:patrol/patrol.dart';
 
 import '../robot/register_robot.dart';
 
 void main() {
-
+  group('Suite Registro', () {
   patrolTest(
     'registro exitoso con datos válidos',
+    tags: ['smoke', 'regression'],
     ($) async {
       await $.pumpWidgetAndSettle(const MyApp());
 
@@ -24,6 +26,7 @@ void main() {
 
   patrolTest(
     'registro inválido con email ya registrado',
+    tags: ['regression'],
     ($) async {
       await $.pumpWidgetAndSettle(const MyApp());
 
@@ -55,4 +58,5 @@ void main() {
       );
     },
   );
+  });
 }
