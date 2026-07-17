@@ -29,6 +29,11 @@ O descarga manual desde: https://github.com/allure-framework/allure2/releases
 
 Los tests ya están configurados para emitir resultados Allure automáticamente gracias a `AllurePatrolJUnitRunner`.
 
+Los resultados se escriben vía **TestStorage** (`allure.results.useTestStorage=true`),
+en almacenamiento compartido del dispositivo. Esto los hace **inmunes a la
+desinstalación de la app** y al `clearPackageData` del orchestrator, así que ya
+**no** hace falta `--no-uninstall`:
+
 ```bash
 # Con Patrol CLI
 patrol test
@@ -41,19 +46,28 @@ patrol test
 
 ## 3. Extraer Resultados del Dispositivo
 
-Los archivos se generan en el dispositivo/emulador. Extraerlos con ADB:
+Con TestStorage los archivos quedan en almacenamiento compartido, en:
+`/sdcard/googletest/test_outputfiles/allure-results`
+
+Se extraen directamente con `tar` (sin `run-as`, la app ya no importa):
 
 ```bash
+rm -rf allure-results
 mkdir -p allure-results
 
 # Desde almacenamiento externo
 adb pull /sdcard/allure-results/ ./allure-results/
 
 # Desde almacenamiento interno de la app
-adb shell run-as com.example.flutter_ces \
-  cat /data/data/com.example.flutter_ces/files/allure-results/ > ./allure-results/
+adb exec-out sh -c 'cd /sdcard/googletest/test_outputfiles && tar cf - allure-results' \
+  | tar xf - -C .
 ```
-
+ Nota: los resultados **se acumulan** entre ejecuciones. Para una corrida limpia,
+> borra el directorio en el dispositivo antes:
+>
+> ```bash
+> adb shell rm -rf /sdcard/googletest/test_outputfiles/allure-results
+> ```
 ---
 
 ## 4. Generar y Ver el Reporte
