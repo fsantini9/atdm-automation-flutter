@@ -27,6 +27,7 @@ class AllurePatrolJUnitRunner : PatrolJUnitRunner() {
         super.onCreate(arguments)
     }
 
+
     private fun createAllureAndroidLifecycle(): AllureAndroidLifecycle {
         // Con TestStorage los resultados se guardan en
         // /sdcard/googletest/test_outputfiles/allure-results y sobreviven a la

@@ -1,0 +1,42 @@
+[
+    {
+        "id": "TC001",
+        "nombre": "Registrarse en el sistema con datos válidos",
+        "resultado_esperado": "El usuario se registra correctamente en el sistema."
+    },
+    {
+        "id": "TC002",
+        "nombre": "Registrarse en el sistema con datos inválidos",
+        "resultado_esperado": "El sistema impide el registro y muestra un mensaje de error."
+    },
+    {
+        "id": "TC003",
+        "nombre": "Iniciar sesión con datos válidos",
+        "resultado_esperado": "El usuario accede correctamente al sistema."
+    },
+    {
+        "id": "TC004",
+        "nombre": "Iniciar sesión con datos inválidos",
+        "resultado_esperado": "El sistema rechaza el inicio de sesión y muestra un mensaje de error."
+    },
+    {
+        "id": "TC005",
+        "nombre": "Crear un carrito de compra y concretarlo",
+        "resultado_esperado": "La compra se procesa correctamente."
+    },
+    {
+        "id": "TC006",
+        "nombre": "Crear un carrito de compra y cancelarlo",
+        "resultado_esperado": "La compra se cancela y no se procesa ningún pedido."
+    },
+    {
+        "id": "TC007",
+        "nombre": "Configurar y guardar información personal",
+        "resultado_esperado": "La información personal se guarda correctamente."
+    },
+    {
+        "id": "TC008",
+        "nombre": "Configurar información personal y validar campos vacíos",
+        "resultado_esperado": "El sistema debe impedir guardar la información y mostrar mensajes de validación para los campos obligatorios."
+    }
+]

@@ -3,117 +3,114 @@ import 'package:flutter_ces/main.dart';
 import 'package:patrol/patrol.dart';
 
 import '../../login/robot/login_robot.dart';
-import '../../mcp/mcp_client.dart';
 import '../robot/compra_robot.dart';
 import '../robot/productos_robot.dart';
 
 void main() {
+  const testEmail = 'test@tecnoshopper.com';
+  const testPassword = 'password123';
   group('Suite Compra', () {
-  patrolTest(
-    'compra exitosa',
-    tags: ['smoke', 'regression'],
-    ($) async {
-      final user = await McpClient.getTestUser();
+    patrolTest(
+      'compra exitosa',
+      tags: ['smoke', 'regression'],
+      ($) async {
+        await $.pumpWidgetAndSettle(const MyApp());
 
-      await $.pumpWidgetAndSettle(const MyApp());
+        final loginRobot = LoginRobot($);
+        final productosRobot = ProductosRobot($);
+        final compraRobot = CompraRobot($);
 
-      final loginRobot = LoginRobot($);
-      final productosRobot = ProductosRobot($);
-      final compraRobot = CompraRobot($);
+        // Login
+        await loginRobot.ingresarEmail(testEmail);
+        await loginRobot.ingresarPassword(testPassword);
+        await loginRobot.presionarBotonLogin();
+        await loginRobot.verificarInicioDeSesionExitoso();
 
-      // Login
-      await loginRobot.ingresarEmail(user.email);
-      await loginRobot.ingresarPassword(user.password);
-      await loginRobot.presionarBotonLogin();
-      await loginRobot.verificarInicioDeSesionExitoso();
+        // Producto
+        await productosRobot.seleccionarProducto(1);
+        await productosRobot.agregarAlCarrito();
+        await productosRobot.volverAlCatalogo();
+        await productosRobot.abrirCarrito();
+        await productosRobot.verificarCarritoVisible();
 
-      // Producto
-      await productosRobot.seleccionarProducto(1);
-      await productosRobot.agregarAlCarrito();
-      await productosRobot.volverAlCatalogo();
-      await productosRobot.abrirCarrito();
-      await productosRobot.verificarCarritoVisible();
+        // Checkout
+        await compraRobot.finalizarCompra();
+        await compraRobot.siguiente();
 
-      // Checkout
-      await compraRobot.finalizarCompra();
-      await compraRobot.siguiente();
+        // Información
+        await compraRobot.ingresarEmail('jorge@test.com');
+        await compraRobot.ingresarPais();
+        await compraRobot.ingresarApellido('Duarte');
+        await compraRobot.ingresarDireccion('18 de julio 2030');
+        await compraRobot.ingresarCiudad('Montevideo');
+        await compraRobot.ingresarCodigoPostal('11000');
+        await compraRobot.continuarAlPago();
 
-      // Información
-      await compraRobot.ingresarEmail('jorge@test.com');
-      await compraRobot.ingresarPais();
-      await compraRobot.ingresarApellido('Duarte');
-      await compraRobot.ingresarDireccion('18 de julio 2030');
-      await compraRobot.ingresarCiudad('Montevideo');
-      await compraRobot.ingresarCodigoPostal('11000');
-      await compraRobot.continuarAlPago();
+        // Pago
+        await compraRobot.ingresarNumeroTarjeta('4444444444444444');
+        await compraRobot.ingresarNombreTarjeta('Jorge Duarte');
+        await compraRobot.ingresarFechaExpiracion('1050');
+        await compraRobot.ingresarCodigoSeguridad('111');
 
-      // Pago
-      await compraRobot.ingresarNumeroTarjeta('4444444444444444');
-      await compraRobot.ingresarNombreTarjeta('Jorge Duarte');
-      await compraRobot.ingresarFechaExpiracion('1050');
-      await compraRobot.ingresarCodigoSeguridad('111');
+        await compraRobot.comprar();
 
-      await compraRobot.comprar();
+        // Validación
+        await compraRobot.verificarCompraExitosa();
+      },
+    );
 
-      // Validación
-      await compraRobot.verificarCompraExitosa();
-    },
-  );
+    patrolTest(
+      'compra cancelada',
+      tags: ['regression'],
+      ($) async {
+        await $.pumpWidgetAndSettle(const MyApp());
 
-   patrolTest(
-    'compra cancelada',
-    tags: ['regression'],
-    ($) async {
-      final user = await McpClient.getTestUser();
+        final loginRobot = LoginRobot($);
+        final productosRobot = ProductosRobot($);
+        final compraRobot = CompraRobot($);
 
-      await $.pumpWidgetAndSettle(const MyApp());
+        // Login
+        await loginRobot.ingresarEmail(testEmail);
+        await loginRobot.ingresarPassword(testPassword);
+        await loginRobot.presionarBotonLogin();
+        await loginRobot.verificarInicioDeSesionExitoso();
 
-      final loginRobot = LoginRobot($);
-      final productosRobot = ProductosRobot($);
-      final compraRobot = CompraRobot($);
+        // Producto
+        await productosRobot.seleccionarProducto(1);
+        await productosRobot.agregarAlCarrito();
+        await productosRobot.volverAlCatalogo();
 
-      // Login
-      await loginRobot.ingresarEmail(user.email);
-      await loginRobot.ingresarPassword(user.password);
-      await loginRobot.presionarBotonLogin();
-      await loginRobot.verificarInicioDeSesionExitoso();
+        // Carrito
+        await productosRobot.abrirCarrito();
+        await productosRobot.verificarCarritoVisible();
 
-      // Producto
-      await productosRobot.seleccionarProducto(1);
-      await productosRobot.agregarAlCarrito();
-      await productosRobot.volverAlCatalogo();
+        // Resumen
+        await compraRobot.finalizarCompra();
+        await compraRobot.siguiente();
 
-      // Carrito
-      await productosRobot.abrirCarrito();
-      await productosRobot.verificarCarritoVisible();
+        // Información
+        await compraRobot.ingresarEmail('jorge@test.com');
+        await compraRobot.ingresarApellido('Duarte');
+        await compraRobot.ingresarDireccion('18 de julio 2030');
+        await compraRobot.ingresarCiudad('Montevideo');
+        await compraRobot.ingresarCodigoPostal('11000');
 
-      // Resumen
-      await compraRobot.finalizarCompra();
-      await compraRobot.siguiente();
+        await compraRobot.continuarAlPago();
 
-      // Información
-      await compraRobot.ingresarEmail('jorge@test.com');
-      await compraRobot.ingresarApellido('Duarte');
-      await compraRobot.ingresarDireccion('18 de julio 2030');
-      await compraRobot.ingresarCiudad('Montevideo');
-      await compraRobot.ingresarCodigoPostal('11000');
+        // Pago
+        await compraRobot.ingresarNumeroTarjeta('4444444444444444');
+        await compraRobot.ingresarNombreTarjeta('Jorge Duarte');
+        await compraRobot.ingresarFechaExpiracion('1050');
+        await compraRobot.ingresarCodigoSeguridad('111');
 
-      await compraRobot.continuarAlPago();
+        // Cancelar compra
+        await compraRobot.volver(); // Pago -> Información
+        await compraRobot.volver(); // Información -> Resumen
+        await compraRobot.volver(); // Resumen -> Carrito
 
-      // Pago
-      await compraRobot.ingresarNumeroTarjeta('4444444444444444');
-      await compraRobot.ingresarNombreTarjeta('Jorge Duarte');
-      await compraRobot.ingresarFechaExpiracion('1050');
-      await compraRobot.ingresarCodigoSeguridad('111');
-
-      // Cancelar compra
-      await compraRobot.volver(); // Pago -> Información
-      await compraRobot.volver(); // Información -> Resumen
-      await compraRobot.volver(); // Resumen -> Carrito
-
-      // Validación
-      await productosRobot.verificarCarritoVisible();
-    },
-  );
+        // Validación
+        await productosRobot.verificarCarritoVisible();
+      },
+    );
   });
 }
